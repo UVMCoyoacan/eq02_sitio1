@@ -1,0 +1,167 @@
+:root{
+    --fondoMenu:#EA858D;
+    --fondoBtnMenuHover:#D86C74;
+    --colorFondoMenu:#EDEDED;
+    --colorTextoMenuPie:#7A1E25;
+    --fondo:#FFC9CD;
+}
+body{
+    background-color: var(--fondo);
+}
+.Icono{
+    height: 64px;
+    border-radius:12.5% ;
+}
+.Menu{
+    background-color:var(--fondoMenu) ;
+    display: flex;
+    flex: 1;
+    height:auto;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+.Menu-nav{
+    display: inline-flex;
+    flex: 3;
+    align-items: center;
+    justify-items: center;
+}
+.Menu-obj{
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    width: 33%;
+
+}
+.Menu-obj li{
+    display: inline-flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    
+}
+.Menu-obj li a{
+    width: 128;
+    height: 64;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: var(--colorFondoMenu);
+    padding: 10px;
+}
+.Menu-obj li a:hover{
+    background-color: var(--fondoBtnMenuHover);
+}
+#Menu-titulo{
+    font-size: 36px;
+}
+.Pie{
+    background-color:var(--fondoMenu) ;
+    display: flex;
+    flex: 1;
+    height:auto;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+.Pie-nav{
+    display: inline-flex;
+    flex: 3;
+    align-items: center;
+    justify-items: center;
+}
+.Pie-obj{
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    width: 33%;
+}
+.Pie-obj li{
+    display: inline-flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+.Pie-obj li a{
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: var(--colorTextoMenuPie);
+    padding: 10px;
+}
+.Pie-obj li a:hover{
+    background-color: var(--fondoBtnMenuHover);
+}
+.Pie #Pie-datos{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: start;
+}
+.Pie #Pie-iconos{
+    display: inline-flex;
+    flex-direction: row-reverse;
+}
+.Pie .Pie-Icono {
+    transition: transform 0.1s ease;
+}
+.Pie .Pie-Icono:hover{
+    fill:var(--colorFondoMenu);
+    transform: scale(1.5);
+}
+.Pagina{
+    width: 100%;
+    display: inline-block;
+    
+    
+}
+.Contenido{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.Seccion{
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+    border-style: dashed;
+}
+.ElemPres{
+    width: 50%;
+    align-items: center ;
+    justify-content: center;
+    text-align: center;
+    font-size: x-large;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.ContPres{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.ElemVariedad{
+    width: 100%;
+    align-items: center ;
+    justify-content: center;
+    border-style:dotted;
+    text-align: center;
+    font-size: x-large;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-style: dashed;
+}
+.ContVariedad{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.CatalogoVariedad{
+    width: 25%;
+    
+}
+
