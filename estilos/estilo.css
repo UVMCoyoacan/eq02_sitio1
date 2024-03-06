@@ -124,7 +124,6 @@ body{
     width: 100%;
     align-items: center;
     margin-top: 20px;
-    border-style: dashed;
 }
 .ElemPres{
     width: 50%;
@@ -146,12 +145,12 @@ body{
     width: 100%;
     align-items: center ;
     justify-content: center;
-    border-style:dotted;
     text-align: center;
     font-size: x-large;
     margin-left: 2%;
     margin-right: 2%;
-    border-style: dashed;
+    display: flex;
+
 }
 .ContVariedad{
     display: flex;
@@ -162,6 +161,26 @@ body{
 }
 .CatalogoVariedad{
     width: 25%;
+}
+.ImgDiv{
+    object-fit: cover;
+}
+.CatalogoIMG{
+    max-width: 200px;
+    height: 200px;
     
+}
+.OpinionIMG
+{
+    text-align: center;
+}
+.Opiniones{
+    width: 50%;
+}
+img{
+    transition: transform 0.1s ease;
+}
+img:hover{
+    transform: scale(1.1);
 }
 
