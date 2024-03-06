@@ -117,10 +117,11 @@ body{
     background-color: var(--fondoBtnMenuHover);
 }
 .footer-contacto{
-    width: 300px;
+    width: 100%;
     z-index: 1;
     grid-column: 1;
     grid-row: 1/2;
+    margin: 0 10px;
 }
 
 @media (min-width:1000px) {
