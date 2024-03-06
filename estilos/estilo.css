@@ -161,6 +161,7 @@ body{
 }
 .CatalogoVariedad{
     width: 25%;
+    transition: transform 0.1s ease;
 }
 .ImgDiv{
     object-fit: cover;
@@ -177,10 +178,7 @@ body{
 .Opiniones{
     width: 50%;
 }
-img{
-    transition: transform 0.1s ease;
-}
-img:hover{
+
+.CatalogoVariedad:hover{
     transform: scale(1.1);
 }
-
