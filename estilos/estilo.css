@@ -172,9 +172,7 @@ body{
 
 
 
-.cuerpo{
-    height: 100%;
-}
+
 .nav-link2{
     color: var(--colorFondoMenu);
     text-decoration: none;
@@ -200,17 +198,20 @@ body{
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(autofit,minmax(200px,1fr));
+    margin:0;
 }
 .Seccion{
-    grid-column: 0;
+    width: 100%;
+    grid-column: 1;
     padding: 0;
     display: grid;
     justify-content: space-between;
     align-items: center;
     grid-template-columns: repeat(autofit,minmax(200px,1fr));
     height: auto;
-    margin: 50px 0;
-    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
 }
 .s1-txt
 {
@@ -266,4 +267,73 @@ body{
 .item:hover{
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.form-conct{
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: space-between;
+    gap:10px;
+    margin: 0;
+}
+.contacto-enc{
+    width: 100%;
+    grid-column: 1;
+    grid-row: 1;
+    margin:0 30px;
+
+}
+.contacto-form{
+    width: 100%;
+    grid-column: 2;
+    grid-row: 1;
+    margin:20px 0px;
+}
+.contacto-iconos{
+    list-style: none;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-items: center;
+    margin:0;
+    margin-right: 30px;
+    
+}
+.contacto-item{
+    align-items: center;
+    margin:0;
+    justify-items: center;
+    margin-top: 40px;
+}
+.contacto-icono{
+    width: 8vh;
+    margin:0;
+}
+.contacto-link{
+    border-radius: 12px;
+    transition: 0.3s ease-out;
+}
+.contacto-icono:hover{
+    transform: scale(1.1);
+}
+.contacto-elem{
+    width: 100%;
+    background-color: var(--fondoMenu);
+    color: var(--colorFondoMenu);
+    font-size: large;
+    border-radius: 6px;
+    margin: 10px 0;
+    border-color: var(--colorTextoMenuPie);
+}
+.btn_contacto_enviar{
+    padding: 5px 40px;
+    background-color: var(--fondoMenu);
+    border-radius: 6px;
+    border-color: var(--colorTextoMenuPie);
+}
+.btn_contacto_enviar:hover{
+    background-color: var(--fondoBtnMenuHover);
 }
