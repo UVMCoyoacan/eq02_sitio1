@@ -124,54 +124,6 @@ body{
     margin: 0 10px;
 }
 
-@media (min-width:1000px) {
-    .nav{
-        --state-hamburguer:scale(0);
-        --state-menu: translate(0);
-    }
-    
-    .nav:target{
-        --state-close: scale(0);
-    }
-
-    .nav-links{
-        padding: 0;
-        background-color: unset;
-        position: unset;
-        gap: 1.5em;
-        grid-auto-flow: column;
-    
-        transform: unset;
-
-        grid-column: -2/-1;
-        grid-row: 1/2;
-    }
-
-    .nav-link{
-        font-size: 1rem;
-        letter-spacing: none;
-    }
-    .nav-header{
-        min-height: 54px;
-        height: 1vh;
-        min-width: 396px;
-        color:var(--colorFondoMenu);
-        background-color: var(--fondoMenu);
-    }
-    body {
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        background-color: var(--fondo);
-        width: 90%;
-        margin: 0 5%;
-        min-width: 396px;
-        font-size: 1em;
-    };
-   
-
-}
-
-
-
 
 .nav-link2{
     color: var(--colorFondoMenu);
@@ -295,6 +247,7 @@ body{
     list-style: none;
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 30px;
     align-items: center;
     justify-items: center;
@@ -336,4 +289,53 @@ body{
 }
 .btn_contacto_enviar:hover{
     background-color: var(--fondoBtnMenuHover);
+}
+@media (min-width:1000px) {
+    .nav{
+        --state-hamburguer:scale(0);
+        --state-menu: translate(0);
+    }
+    
+    .nav:target{
+        --state-close: scale(0);
+    }
+
+    .nav-links{
+        padding: 0;
+        background-color: unset;
+        position: unset;
+        gap: 1.5em;
+        grid-auto-flow: column;
+    
+        transform: unset;
+
+        grid-column: -2/-1;
+        grid-row: 1/2;
+    }
+
+    .nav-link{
+        font-size: 1rem;
+        letter-spacing: none;
+    }
+    .nav-header{
+        min-height: 54px;
+        height: 1vh;
+        min-width: 396px;
+        color:var(--colorFondoMenu);
+        background-color: var(--fondoMenu);
+    }
+    body {
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        background-color: var(--fondo);
+        width: 90%;
+        margin: 0 5%;
+        min-width: 396px;
+        font-size: 1em;
+    }
+    .contacto-iconos{
+        display: flex;
+        flex-direction: row;
+    }
+   
+
 }
