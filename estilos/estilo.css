@@ -262,7 +262,7 @@ body{
     margin-top: 40px;
 }
 .contacto-icono{
-    width: 8vh;
+    width: 4vh;
     margin:0;
 }
 .contacto-link{
@@ -335,7 +335,11 @@ body{
     .contacto-iconos{
         display: flex;
         flex-direction: row;
+        gap: 10px;
     }
-   
+    .contacto-icono{
+        width: 8vh;
+    }
+
 
 }
