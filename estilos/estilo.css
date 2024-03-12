@@ -147,19 +147,15 @@ body{
 .Cuerpo{
     width: 100%;
     display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(autofit,minmax(200px,1fr));
+    grid-column: 1fr;
     margin:0;
 }
 .Seccion{
     width: 100%;
-    grid-column: 1;
+    grid-column: 1/2;
     padding: 0;
     display: grid;
-    justify-content: space-between;
     align-items: center;
-    grid-template-columns: repeat(autofit,minmax(200px,1fr));
     height: auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -290,6 +286,42 @@ body{
 .btn_contacto_enviar:hover{
     background-color: var(--fondoBtnMenuHover);
 }
+
+.Tienda{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    gap: 60px;
+
+}
+.Tienda-item{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    background-color: var(--fondoMenu);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 6px;
+    padding: 10px 5px;
+    transition: 0.3s ease-out;
+    
+}
+.Producto-IMG{
+    width: 40vh;
+}
+.Tienda-item:hover{
+    background-color: var(--fondoBtnMenuHover);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
 @media (min-width:1000px) {
     .nav{
         --state-hamburguer:scale(0);
@@ -339,6 +371,19 @@ body{
     }
     .contacto-icono{
         width: 8vh;
+    }
+    .Producto-IMG{
+        width: 25vh;
+    }
+    .Tienda{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        gap: 30px 15px;
+    
     }
 
 
