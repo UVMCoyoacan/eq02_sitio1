@@ -21,18 +21,6 @@
             "Titulo":"BOLSAS VIRALES DE STEVE MADDEN",
             "Sub":"599.00",
             "Ruta":"../ims/Productos/prod-1.png"
-        },
-
-        {
-            "Titulo":"Victoria Secret Pink",
-            "Sub":"1099.00",
-            "Ruta":"../ims/Productos/prod-2.png"
-        },
-
-        {
-            "Titulo":"Valentine’s Day Collection by Coach",
-            "Sub":"1599.00",
-            "Ruta":"../ims/Productos/prod-3.png"
         }
 
     ]
