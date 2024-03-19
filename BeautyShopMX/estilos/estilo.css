@@ -399,10 +399,7 @@ grid-template-columns: 1fr 1fr;
 .link-is a{
     color:var(--colorTextoMenuPie);
 }
-.footer{
-    position:relative;
-    bottom: 0;
-}
+
 @media (min-width:1000px) {
     .nav{
         --state-hamburguer:scale(0);
