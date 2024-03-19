@@ -41,15 +41,16 @@ async function login(req, res) {
     const emailLowerCase = email.toLowerCase();
 
     const userStore = await User.findOne({ email: emailLowerCase });
+    console.log(userStore);
 
     if (!userStore) {
-      return res.status(500).send({ msg: "Error del servidor" });
+      return res.status(500).send({ msg: "Error del servidor 1" });
     } else {
       bcrypt.compare(password, userStore.password, (bcryptError, chek) => {
         if (bcryptError) {
-          res.status(500).send({ msg: "Error del servidor" });
+          res.status(500).send({ msg: "Error del servidor 2" });
         } else if (!chek) {
-          res.status(400).send({ msg: "Error del servidor" });
+          res.status(400).send({ msg: "Error del servidor 3" });
         } else if (!userStore.active) {
           res.status(401).send({ msg: "Usuario no activo" });
         } else {

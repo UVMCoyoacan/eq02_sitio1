@@ -129,6 +129,9 @@ body{
     grid-row: 1;
     margin: 0 10px;
 }
+.footer{
+    bottom: 1;
+}
 
 
 .nav-link2{
@@ -302,6 +305,7 @@ grid-template-columns: 1fr 1fr;
     background-color: var(--fondoMenu);
     border-radius: 6px;
     border-color: var(--colorTextoMenuPie);
+    margin-top: 8px;
 }
 .btn_contacto_enviar:hover{
     background-color: var(--fondoBtnMenuHover);
@@ -354,15 +358,21 @@ grid-template-columns: 1fr 1fr;
     background-color: var(--fondoInicioSesion);
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-column: 1fr;
+    height: 100%;
 
 }
 .is-elem{
     background-color: var(--fonInicioSesionHover);
     width: 100%;
     border-radius: 6px;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
+    margin-top: 8px;
     color:var(--colorFondoMenu);
     text-align: left;
+    border-style: none;
+    height: 32px;
 }
 .is-elem:focus{
     background-color: var(--fonInicioSesionHover);

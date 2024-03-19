@@ -6,7 +6,7 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../estilos/estilo.css">
         <link rel="icon" type="image/jpeg" href="../ims/logo.jpeg">
-        <script src="../js/login.js"></script>
+       
         
     </head>
     
@@ -31,20 +31,20 @@
         <div class="Cuerpo">
             <!--Seccion 1 -->
             <div class="Seccion">
-                         <div class="form-iniciar-sesion">
-                            <h1>Iniciar Sesión</h1>
-                            <form id="login-form">
-                                <label for="email">Email: </label>
-                                <input type="email" id="email" name="email" required class="is-elem"><br>
-                                <label for="password">Contraseña: </label>
-                                <input type="password" id="password" name="password"  required class="is-elem"><br>
-                                <input type="submit" value="Iniciar Sesión" class="btn_contacto_enviar">
-                            </form>
-                            <ul class="links-inicio-sesion">
-                                <li class="link-is"><a href="../sec_registrarse/registrarse.html">¿No tienes una cuenta? Registrate ahora</a></li>
-                                <li class="link-is"><a href="../sec_recuperarPassword/recuperarPassword.html">¿Olvidaste tu contraseña?</a></li>
-                            </ul>
-                         </div>
+                <div class="form-iniciar-sesion">
+                    <h1>Iniciar Sesión</h1>
+                    <form id="login-form">
+                        <input type="email" id="email" name="email" required class="is-elem" placeholder="Email"><br>
+                        <input type="password" id="password" name="password" required class="is-elem" placeholder="Contraseña"><br>
+                        <input type="submit" value="Iniciar Sesión" class="btn_contacto_enviar">
+                    </form>
+                    <ul class="links-inicio-sesion">
+                        <li class="link-is"><a href="../sec_registrarse/registrarse.html">¿No tienes una cuenta? Registrate
+                                ahora</a></li>
+                        <li class="link-is"><a href="../sec_recuperarPassword/recuperarPassword.html">¿Olvidaste tu contraseña?</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <footer class="nav-header footer">
@@ -62,5 +62,6 @@
                 </ul>
             </nav>
         </footer>
+        <script src="../js/login.js"></script>
     </body>
 </html>
