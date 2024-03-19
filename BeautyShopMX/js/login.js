@@ -28,8 +28,8 @@ formulario.addEventListener("submit", function(event) {
   }).then(function(data){
     console.log(data);
   }).catch(function(error){
-    console.log("error al realizar la solicitud");
+    console.log("error al realizar la solicitud: "+ error);
   });
-  console.log(url+ ", "+email+", "+ password);
+  console.log(url);
 
 });
