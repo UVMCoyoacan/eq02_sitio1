@@ -160,6 +160,7 @@ body{
     margin:0;
     margin-left: 5%;
     margin-right: 5%;
+    padding: 0;
 
 }
 .Seccion{
@@ -171,6 +172,8 @@ body{
     height: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
     
 }
 
@@ -417,6 +420,35 @@ grid-template-columns: 1fr 1fr;
     background-color:crimson;
     align-items: center;
     justify-items: center;
+}
+.Submenu{
+    background-color: var(--fondoMenu);
+    display: grid;
+    border-radius: 6px;
+    margin: 0;
+    padding: 0;
+}
+.btn-principal{
+    background-color: var(--fondoMenu);
+    border-style:solid;
+    border-color: var(--colorTextoMenuPie);
+    border-radius: 6px;
+    height: auto;
+    color: var(--colorTextoMenuPie);
+    margin: 5%;
+    min-width: 20%;
+}
+.btn-principal:hover, .btn-principal-selected{
+    background-color: var(--fondoBtnMenuHover);
+}
+.Submenu-lista{
+    list-style: none;
+    display: grid;
+    justify-items:center;
+    align-items: center;
+}
+.Submenu-item{
+    grid-row: 1;
 }
 
 @media (min-width:1100px) {

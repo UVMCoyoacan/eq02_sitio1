@@ -6,24 +6,12 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../estilos/estilo.css">
         <link rel="icon" type="image/jpeg" href="../ims/logo.jpeg">
+        <script src="../js/menus.js"></script>
     </head>
     
-    <body>
+    <body onload="insertarMenus()">
         <!--Menu -->
-        <header class="nav-header">
-            <nav class="nav container" id="nav">
-                <a href="../index.html"><img src="../ims/logo.jpeg" class="nav-logo" /></a>
-                <h2 class="nav-title">Beauty Shop MX</h2>
-                <ul class="nav-links">
-                    <li class="nav-item"><a href="../index.html" class="nav-link">Inicio</a></li>
-                    <li class="nav-item"><a href="../sec_tienda/tienda.html" class="nav-link">Tienda</a></li>
-                    <li class="nav-item"><a href="../sec_contacto/contacto.html" class="nav-link">Contacto</a></li>
-                    <li class="nav-item"><a href="../sec_nosotros/nosotros.html" class="nav-link">Acerca de nosotros</a></li>
-                    <li class="nav-item"><a href="../sec_inicioSesion/iniciarSesion.html" class="nav-link"><img src="../ims/Iconos/login.svg"></a></li>
-                </ul>
-                <a href="#nav" class="nav-hamburguesa"><img src="../ims/Iconos/hamburguer.svg" class="nav-icon"></a>
-                <a href="#" class="nav-close"><img src="../ims/Iconos/close.svg" class="nav-icon"></a>
-            </nav>
+        <header class="nav-header" id="menu">
         </header>
         <!--Contenido de página index -->
         <div class="Cuerpo">
@@ -93,20 +81,8 @@
                 </div>
             </div>
         </div>
-        <footer class="nav-header footer">
-            <nav class="nav container footer-cont" id="nav">
-                <div class="footer-contacto">
-                    <h2 class="nav-title">Beauty Shop MX</h2>
-                    <p>Teléfono: <a href="tel:+525545538595" target="_blank" class="nav-link2">55-4553-8595</a> 
-                        <br>Correo: <a href="mailto:jessicafdz02@outlook.com" target="_blank" class="nav-link2">jessicafdz02@outlook.com</a></p>
-                </div>
-                <ul class="nav-links2">
-                    <li class="nav-item2"><a href="https://www.instagram.com/beautyshopmx02/" target="_blank" class="nav-link2"><img src="../ims/Iconos/instagram.svg" class="footer-icono"></a></li>
-                    <li class="nav-item2"><a href="https://www.facebook.com/profile.php?id=100091941377168"  target="_blank" class="nav-link2"><img src="../ims/Iconos/facebook.svg" class="footer-icono"></a></li>
-                    <li class="nav-item2"><a href="https://chat.whatsapp.com/JEiBSMUKyuzBxZ9lKkKDee"  target="_blank" class="nav-link2"><img src="../ims/Iconos/whatsapp.svg" class="footer-icono"></a></li>
-                    <li class="nav-item2"><a href="https://www.tiktok.com/@beautyshopmx02?_t=8cDjYBdsVPR&_r=1"  target="_blank"  target="_blank" class="nav-link2"><img src="../ims/Iconos/tiktok.svg" class="footer-icono"></a></li>
-                </ul>
-            </nav>
+        <footer class="nav-header footer" id="menu-footer">
+            
         </footer>
     </body>
 </html>
