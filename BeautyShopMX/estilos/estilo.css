@@ -409,6 +409,15 @@ grid-template-columns: 1fr 1fr;
 .link-is a{
     color:var(--colorTextoMenuPie);
 }
+#error{
+    color:white;
+    font-size: larger;
+    border-radius: 6px;
+    width: auto;
+    background-color:crimson;
+    align-items: center;
+    justify-items: center;
+}
 
 @media (min-width:1100px) {
     .nav{

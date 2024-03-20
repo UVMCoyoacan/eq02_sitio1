@@ -14,7 +14,7 @@ async function register(req, res) {
       lastname,
       email: email.toLowerCase(),
       role: "user",
-      active: false,
+      active: true,
       deuda: 0,
       porPagar: 0,
     });
@@ -57,11 +57,10 @@ async function login(req, res) {
           res.status(200).send({
             access: jwt.createAccesToken(userStore),
             refresh: jwt.createRefreshToken(userStore),
+            role: userStore.role,
           });
         }
       });
-      console.log(password);
-      console.log(userStore);
     }
   } catch (error) {
     console.error(error);

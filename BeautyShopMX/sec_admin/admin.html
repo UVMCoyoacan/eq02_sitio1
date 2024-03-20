@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Registrarse</title>
+        <title>Titulo</title>
         <meta charset="UTF-8">
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../estilos/estilo.css">
         <link rel="icon" type="image/jpeg" href="../ims/logo.jpeg">
-
         
     </head>
     
@@ -30,25 +29,9 @@
         <!--Contenido de página index -->
         <div class="Cuerpo">
             <!--Seccion 1 -->
-            <div class="Seccion"> 
-                <div class="form-iniciar-sesion">
-                    <h1>Registrarse</h1><br>
-                    <form id="formulario-registrarse">
-
-                        <input type="text" id="firstname" name="firstname" required class="is-elem" placeholder="Nombre(s)">
-                        <input type="text" id="lastname" name="lastname" required class="is-elem" placeholder="Apellidos">
-                        <input type="email" id="email" name="email" required class="is-elem" placeholder="Email"><br>
-                        <input type="password" id="password" name="password"  required class="is-elem" placeholder="Contraseña"><br>
-                        <div class="cb">
-                            <input type="checkbox" id="terminos" name="terminos" required class="is-elem" value="opcion1" onclick="isAcepted()">
-                            <label for="terminos">Leí los terminos y condiciones</label>
-                        </div>
-                        <input type="submit" value="Registrarse" class="btn_contacto_enviar" disabled="true" id="btn_registrarse">
-                    </form>
-                    <ul class="links-inicio-sesion">
-                        <li class="link-is"><a href="../sec_inicioSesion/iniciarSesion.html">¿Ya tienes una cuenta? Inicia sesión ahora</a></li>
-                    </ul>
-                 </div>         
+            <div class="Seccion">
+                <h1>Sesión de admin</h1>
+                <button class="btn_contacto_enviar" id="btn_cerrarSesion" onclick="cerrarSesion()">Cerrar Sesión</button>          
             </div>
         </div>
         <footer class="nav-header footer">
@@ -66,6 +49,6 @@
                 </ul>
             </nav>
         </footer>
-        <script src="../js/register.js"></script>
+        <script src="../js/admin.js"></script>
     </body>
 </html>
