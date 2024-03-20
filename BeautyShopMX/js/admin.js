@@ -101,11 +101,51 @@ function clickMenu(ind, botones)
   {
     misDatos();
   }
+  else if(btnSelec===1)
+  {
+    agregarProducto();
+  }
+  else if(btnSelec===2)
+  {
+    registrarDeuda();
+  }
+  else if(btnSelec===3)
+  {
+    registrarPago();
+  }
+  else if(btnSelec===4)
+  {
+    buscarCliente();
+  }
 }
 function misDatos()
 {
   const contenedor=document.getElementById("admin-cont");
   const p=document.createElement("p");
   p.innerHTML="Este es el contenido de mis datos";
+  contenedor.appendChild(p);
+}
+function agregarProducto(){
+  const contenedor=document.getElementById("admin-cont");
+  const p=document.createElement("p");
+  p.innerHTML="Este es el contenido de agregar producto";
+  contenedor.appendChild(p);
+}
+function registrarDeuda(){
+  const contenedor=document.getElementById("admin-cont");
+  const p=document.createElement("p");
+  p.innerHTML="Este es el contenido de registrar deuda";
+  contenedor.appendChild(p);
+}
+function registrarPago(){
+  const contenedor=document.getElementById("admin-cont");
+  const p=document.createElement("p");
+  p.innerHTML="Este es el contenido de registrar pago";
+  contenedor.appendChild(p);
+}
+function buscarCliente(){
+  const contenedor=document.getElementById("admin-cont");
+  const p=document.createElement("p");
+  p.innerHTML="Este es el contenido de buscar cliente";
   contenedor.appendChild(p);
 }
