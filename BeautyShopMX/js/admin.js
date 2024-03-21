@@ -120,9 +120,7 @@ async function misDatos() {
   };
 
   const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico", "Rol"];
-  console.log(encabezados);
   datos.toString;
-  console.log(datos);
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de mis datos";
@@ -159,6 +157,85 @@ function agregarProducto() {
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de agregar producto";
   contenedor.appendChild(p);
+  const contenedorHijo = document.createElement("div");
+  const formulario = document.createElement("form");
+  formulario.id = "formulario";
+  contenedorHijo.appendChild(formulario);
+  contenedor.appendChild(contenedorHijo);
+  const formTitulo = document.createElement("input");
+  formTitulo.type = "text";
+  formTitulo.id = "titulo";
+  formTitulo.name = "titulo";
+  formTitulo.required = true;
+  formTitulo.placeholder = "Titulo del prodcuto";
+  formulario.appendChild(formTitulo);
+  formulario.appendChild(document.createElement("br"));
+  const formPrecio = document.createElement("input");
+  formPrecio.type = "number";
+  formPrecio.id = "precio";
+  formPrecio.name = "precio";
+  formPrecio.required = true;
+  formPrecio.placeholder = "Precio del prodcuto";
+  formPrecio.min = 0;
+  formulario.appendChild(formPrecio);
+  formulario.appendChild(document.createElement("br"));
+  const formImagenlb = document.createElement("label");
+  formImagenlb.for = "imagenProd";
+  formImagenlb.innerHTML = "Selecciona la imagen para el producto";
+  formulario.appendChild(formImagenlb);
+  formulario.appendChild(document.createElement("br"));
+  const formImagen = document.createElement("input");
+  formImagen.type = "file";
+  formImagen.id = "imagenProd";
+  formImagen.name = "imagenProd";
+  formImagen.required = true;
+  formImagen.placeholder = "Imagen del prodcuto";
+  formImagen.accept = "image/*";
+  formulario.appendChild(formImagen);
+  formulario.appendChild(document.createElement("br"));
+  const enviarBtn = document.createElement("input");
+  enviarBtn.type = "submit";
+  enviarBtn.value = "Subir producto";
+  enviarBtn.className = "btn_contacto_enviar";
+  formulario.appendChild(enviarBtn);
+
+  formulario.addEventListener("submit", function (event) {
+    const urlGet = "http://localhost:3977/api/v1" + "/user/me/";
+    event.preventDefault();
+    if (verificarSesion()) {
+      const token = localStorage.getItem("token");
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      axios
+        .get(urlGet, { headers })
+        .then(function (response) {
+          if (response.data.role === "admin") {
+            if (btnSelec === 1) {
+              const url = "http://localhost:3977/api/v1" + "/products/add/";
+              const multipart = new FormData();
+              const fileForm = document.getElementById("imagenProd");
+              const tituloForm = document.getElementById("titulo").value;
+              const precioForm = document.getElementById("precio").value;
+              multipart.append("imagen", fileForm.files[0]);
+              multipart.append("titulo", tituloForm);
+              multipart.append("precio", precioForm);
+              axios
+                .post(url, multipart, { headers })
+                .then(function (response) {
+                  console.log(response.data);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  });
 }
 function registrarDeuda() {
   const contenedor = document.getElementById("admin-cont");

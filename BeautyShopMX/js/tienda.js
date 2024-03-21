@@ -28,6 +28,35 @@ function cargarTienda() {
   };
   xhr.send();
 }
+function cargarTiendaApi() {
+  const url = "http://localhost:3977/api/v1" + "/products/";
+  const urlImg = "http://localhost:3977/";
+  axios
+    .get(url)
+    .then(function (response) {
+      var productos = response.data;
+      const contenedor = document.getElementById("tnd");
+      for (let i = 0; i < productos.length; i++) {
+        var item = document.createElement("div");
+        item.className = "Tienda-item";
+        var titulo = document.createElement("H2");
+        titulo.innerHTML = productos[i].titulo;
+        var sub = document.createElement("h5");
+        sub.innerHTML = "$" + productos[i].precio + " MXN";
+        var img = document.createElement("img");
+        img.className = "Producto-IMG";
+        img.src = urlImg + productos[i].imagen;
+        item.appendChild(img);
+        item.appendChild(titulo);
+        item.appendChild(sub);
+
+        contenedor.appendChild(item);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 function ordenarTitulo(productos, orden) {
   if (orden === 1) {
     productos.sort((a, b) => {
