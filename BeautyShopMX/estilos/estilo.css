@@ -13,30 +13,25 @@
 }
 body{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-        background-color: var(--fondo);
-        width: 100%;
-        margin: 0;
-        min-width: 396px;
-        font-size: 0.7em;
-        overflow-x: hidden;
+    background-color: var(--fondo);
+    width: 100%;
+    margin: 0;
+    min-width: 396px;
+    font-size: 0.7em;
+    overflow-x: hidden;
+   
 }
 
 
 
 .nav-header{
     min-height: 54px;
-    height: 1vh;
+    height: 5vh;
     min-width: 396px;
     color:var(--colorFondoMenu);
     background-color: var(--fondoMenu);
 }
-.nav-footer{
-    min-height: 74px;
-    height: 1.1vh;
-    min-width: 396px;
-    color:var(--colorFondoMenu);
-    background-color: var(--fondoMenu);
-}
+
 .container{
     margin: 0 auto;
     width: 100%;
@@ -129,9 +124,7 @@ body{
     grid-row: 1;
     margin: 0 10px;
 }
-.footer{
-    bottom: 1;
-}
+
 
 
 .nav-link2{
@@ -161,6 +154,8 @@ body{
     margin-left: 5%;
     margin-right: 5%;
     padding: 0;
+    
+    
 
 }
 .Seccion{

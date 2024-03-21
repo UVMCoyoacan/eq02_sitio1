@@ -1,6 +1,5 @@
 ///variables globales:
-var btnSelec=0;
-
+var btnSelec = 0;
 
 function cerrarSesion() {
   //console.log("Cerrar sesion");
@@ -9,10 +8,10 @@ function cerrarSesion() {
 }
 document.addEventListener("DOMContentLoaded", function () {
   //verificar si se tiene una sesion iniciada
-  if (/*!verificarSesion()*/ false) {
+  if (!verificarSesion()) {
     window.location.href = "../index.html";
   }
-//verificar si es un admin o no
+  //verificar si es un admin o no
   const url = "http://localhost:3977/api/v1" + "/user/me/";
 
   var opFetch = {
@@ -37,8 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(function (error) {
       console.log("error al realizar la solicitud: " + error);
     });
-    insertarMenu();
-
+  insertarMenu();
 });
 function verificarSesion() {
   // Recuperar el token almacenado en LocalStorage
@@ -53,99 +51,130 @@ function verificarSesion() {
     return false;
   }
 }
-function insertarMenu()
-{
-//insertar el menu
-var botones=[];
-var elementosLista=[];
-const contenedor= document.getElementById("submenu");
-const nav=document.createElement("nav");
-nav.className="Submenu";
-const lista = document.createElement("ul");
-lista.className="Submenu-lista";
-const btnTitulos=["Mis datos","Agregar producto","Registrar deuda","Registrar pago","Buscar cliente"];
+function insertarMenu() {
+  //insertar el menu
+  var botones = [];
+  var elementosLista = [];
+  const contenedor = document.getElementById("submenu");
+  const nav = document.createElement("nav");
+  nav.className = "Submenu";
+  const lista = document.createElement("ul");
+  lista.className = "Submenu-lista";
+  const btnTitulos = [
+    "Mis datos",
+    "Agregar producto",
+    "Registrar deuda",
+    "Registrar pago",
+    "Buscar cliente",
+  ];
 
-for(let i=0;i<btnTitulos.length;i++){
-  const elem=document.createElement("li");
-  elem.className="Submenu-item";
-  const btn=document.createElement("button");
-  btn.className="btn-principal";
-  btn.innerHTML=btnTitulos[i];
-  elem.appendChild(btn);
-  botones.push(btn);
-  elementosLista.push(elem);
+  for (let i = 0; i < btnTitulos.length; i++) {
+    const elem = document.createElement("li");
+    elem.className = "Submenu-item";
+    const btn = document.createElement("button");
+    btn.className = "btn-principal";
+    btn.innerHTML = btnTitulos[i];
+    elem.appendChild(btn);
+    botones.push(btn);
+    elementosLista.push(elem);
+  }
+  for (let i = 0; i < botones.length; i++) {
+    lista.appendChild(elementosLista[i]);
+    botones[i].onclick = function () {
+      clickMenu(i, botones);
+    };
+  }
+  nav.appendChild(lista);
+  contenedor.appendChild(nav);
+  ////Seleccionar [0] como el elemento seleccionado por defecto
+  clickMenu(0, botones);
 }
-for(let i=0;i<botones.length;i++)
-{
-  lista.appendChild(elementosLista[i]);
-  botones[i].onclick=function(){clickMenu(i,botones);}
+function vaciarDiv(contenedor) {
+  contenedor.innerHTML = "";
 }
-nav.appendChild(lista);
-contenedor.appendChild(nav);
-////Seleccionar [0] como el elemento seleccionado por defecto
-clickMenu(0,botones);
-}
-function vaciarDiv(contenedor){
-  contenedor.innerHTML='';
-}
-function clickMenu(ind, botones)
-{
+function clickMenu(ind, botones) {
   vaciarDiv(document.getElementById("admin-cont"));
-  btnSelec=ind;
-  for(let i=0;i<botones.length;i++)
-  {
-    botones[i].className="btn-principal";
+  btnSelec = ind;
+  for (let i = 0; i < botones.length; i++) {
+    botones[i].className = "btn-principal";
   }
-  botones[btnSelec].className="btn-principal btn-principal-selected"
-  if(btnSelec===0)
-  {
+  botones[btnSelec].className = "btn-principal btn-principal-selected";
+  if (btnSelec === 0) {
     misDatos();
-  }
-  else if(btnSelec===1)
-  {
+  } else if (btnSelec === 1) {
     agregarProducto();
-  }
-  else if(btnSelec===2)
-  {
+  } else if (btnSelec === 2) {
     registrarDeuda();
-  }
-  else if(btnSelec===3)
-  {
+  } else if (btnSelec === 3) {
     registrarPago();
-  }
-  else if(btnSelec===4)
-  {
+  } else if (btnSelec === 4) {
     buscarCliente();
   }
 }
-function misDatos()
-{
-  const contenedor=document.getElementById("admin-cont");
-  const p=document.createElement("p");
-  p.innerHTML="Este es el contenido de mis datos";
+async function misDatos() {
+  var datos = [];
+  const url = "http://localhost:3977/api/v1" + "/user/me/";
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico", "Rol"];
+  console.log(encabezados);
+  datos.toString;
+  console.log(datos);
+  const contenedor = document.getElementById("admin-cont");
+  const p = document.createElement("p");
+  p.innerHTML = "Este es el contenido de mis datos";
+  const contenedorHijo = document.createElement("div");
+
+  axios
+    .get(url, { headers })
+    .then(function (response) {
+      var datosPet = [];
+      datosPet.push(response.data.firstname);
+      datosPet.push(response.data.lastname);
+      datosPet.push(response.data.email);
+      datosPet.push(response.data.role);
+      for (let i = 0; i < encabezados.length; i++) {
+        const enc = document.createElement("h4");
+        enc.innerHTML = encabezados[i];
+        const dato = document.createElement("h5");
+        dato.innerHTML = datosPet[i];
+        contenedorHijo.appendChild(enc);
+        contenedorHijo.appendChild(document.createElement("br"));
+        contenedorHijo.appendChild(dato);
+        contenedorHijo.appendChild(document.createElement("br"));
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  contenedor.appendChild(p);
+  contenedor.appendChild(contenedorHijo);
+}
+function agregarProducto() {
+  const contenedor = document.getElementById("admin-cont");
+  const p = document.createElement("p");
+  p.innerHTML = "Este es el contenido de agregar producto";
   contenedor.appendChild(p);
 }
-function agregarProducto(){
-  const contenedor=document.getElementById("admin-cont");
-  const p=document.createElement("p");
-  p.innerHTML="Este es el contenido de agregar producto";
+function registrarDeuda() {
+  const contenedor = document.getElementById("admin-cont");
+  const p = document.createElement("p");
+  p.innerHTML = "Este es el contenido de registrar deuda";
   contenedor.appendChild(p);
 }
-function registrarDeuda(){
-  const contenedor=document.getElementById("admin-cont");
-  const p=document.createElement("p");
-  p.innerHTML="Este es el contenido de registrar deuda";
+function registrarPago() {
+  const contenedor = document.getElementById("admin-cont");
+  const p = document.createElement("p");
+  p.innerHTML = "Este es el contenido de registrar pago";
   contenedor.appendChild(p);
 }
-function registrarPago(){
-  const contenedor=document.getElementById("admin-cont");
-  const p=document.createElement("p");
-  p.innerHTML="Este es el contenido de registrar pago";
-  contenedor.appendChild(p);
-}
-function buscarCliente(){
-  const contenedor=document.getElementById("admin-cont");
-  const p=document.createElement("p");
-  p.innerHTML="Este es el contenido de buscar cliente";
+function buscarCliente() {
+  const contenedor = document.getElementById("admin-cont");
+  const p = document.createElement("p");
+  p.innerHTML = "Este es el contenido de buscar cliente";
   contenedor.appendChild(p);
 }

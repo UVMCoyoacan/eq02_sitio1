@@ -43,35 +43,25 @@ formulario.addEventListener("submit", function (event) {
     });
 });
 document.addEventListener("DOMContentLoaded", function () {
-  if (verificarSesion()) {
-    const url = "http://localhost:3977/api/v1" + "/user/me/";
-    const opFetch = {
-      method: "GET",
-      headers: {
-        AUTHORIZATION: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
+  const url = "http://localhost:3977/api/v1" + "/user/me/";
 
-    fetch(url, opFetch)
+  if (verificarSesion()) {
+    const token = localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .get(url, { headers })
       .then(function (response) {
-        if (!response) {
-          throw new Error("Hubo un problema: " + response.statusText);
-        }
-        return response.json();
-      })
-      .then(function (data) {
-        if (data.role === "admin") {
+        if (response.data.role === "admin") {
           window.location.href = "../sec_admin/admin.html";
-        } else if (data.role === "user") {
-          window.location.href = "../sec_user/user.html";
         } else {
-          console.log("error");
+          window.location.href = "../sec_user/user.html";
         }
       })
       .catch(function (error) {
-        console.log("error al realizar la solicitud: " + error);
+        console.log(error);
       });
-    window.location.href = "../sec_user/user.html";
   }
 });
 function verificarSesion() {
