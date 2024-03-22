@@ -24,7 +24,7 @@ function crearMenu() {
     imgLogo.src = rutasIMG[0];
     imgLogo.className = "nav-logo";
     logo.appendChild(imgLogo);
-    const titulo = document.createElement("h2");
+    const titulo = document.createElement("h4");
     titulo.innerHTML = "Beauty Shop MX";
     titulo.className = "nav-title";
     const lista = document.createElement("ul");

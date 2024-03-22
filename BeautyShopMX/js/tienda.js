@@ -11,9 +11,11 @@ function cargarTienda() {
       for (let i = 0; i < productos.length; i++) {
         var item = document.createElement("div");
         item.className = "Tienda-item";
-        var titulo = document.createElement("H2");
+        var titulo = document.createElement("H4");
+        titulo.className="Tienda-item-titulo";
         titulo.innerHTML = productos[i].Titulo;
         var sub = document.createElement("h5");
+        sub.className="Tienda-item-precio";
         sub.innerHTML = "$" + productos[i].Sub + " MXN";
         var img = document.createElement("img");
         img.className = "Producto-IMG";
@@ -39,9 +41,11 @@ function cargarTiendaApi() {
       for (let i = 0; i < productos.length; i++) {
         var item = document.createElement("div");
         item.className = "Tienda-item";
-        var titulo = document.createElement("H2");
+        var titulo = document.createElement("H4");
         titulo.innerHTML = productos[i].titulo;
+        titulo.className="Tienda-item-titulo";
         var sub = document.createElement("h5");
+        sub.className="Tienda-item-precio";
         sub.innerHTML = "$" + productos[i].precio + " MXN";
         var img = document.createElement("img");
         img.className = "Producto-IMG";
