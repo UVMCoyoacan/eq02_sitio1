@@ -112,6 +112,7 @@ function clickMenu(ind, botones) {
   }
 }
 async function misDatos() {
+  document.getElementsByTagName("title")[0].innerHTML = "Mis datos";
   var datos = [];
   const url = "http://localhost:3977/api/v1" + "/user/me/";
   const token = localStorage.getItem("token");
@@ -153,6 +154,7 @@ async function misDatos() {
   contenedor.appendChild(contenedorHijo);
 }
 function agregarProducto() {
+  document.getElementsByTagName("title")[0].innerHTML = "Agregar producto";
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de agregar producto";
@@ -224,6 +226,12 @@ function agregarProducto() {
                 .post(url, multipart, { headers })
                 .then(function (response) {
                   console.log(response.data);
+                  const msgCont = document.createElement("div");
+                  contenedor.appendChild(msgCont);
+                  const msg = document.createElement("h2");
+                  msg.innerHTML = `El producto "${tituloForm}" se ha agregado exitosamente`;
+                  msgCont.appendChild(msg);
+                  formulario.reset();
                 })
                 .catch(function (error) {
                   console.log(error);
@@ -238,18 +246,21 @@ function agregarProducto() {
   });
 }
 function registrarDeuda() {
+  document.getElementsByTagName("title")[0].innerHTML = "Registrar deuda";
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de registrar deuda";
   contenedor.appendChild(p);
 }
 function registrarPago() {
+  document.getElementsByTagName("title")[0].innerHTML = "Registrar pago";
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de registrar pago";
   contenedor.appendChild(p);
 }
 function buscarCliente() {
+  document.getElementsByTagName("title")[0].innerHTML = "Buscar cliente";
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de buscar cliente";

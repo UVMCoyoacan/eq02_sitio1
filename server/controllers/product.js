@@ -26,7 +26,7 @@ async function addProduct(req, res) {
       product.imagen = imagePath;
     }
     const productStorage = await product.save();
-    res.status(200).send(productStorage);
+    res.status(200).send({ msg: "ok" });
   } catch (error) {
     console.log(error);
   }
