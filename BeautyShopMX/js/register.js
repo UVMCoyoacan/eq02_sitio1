@@ -1,3 +1,4 @@
+const url = api.getUrl();
 function isAcepted() {
   const cb = document.getElementById("terminos");
   const btn = document.getElementById("btn_registrarse");
@@ -11,7 +12,6 @@ function isAcepted() {
 var formulario = document.getElementById("formulario-registrarse");
 
 formulario.addEventListener("submit", function (event) {
-  const url = "http://localhost:3977/api/v1" + "/auth/register/";
   event.preventDefault();
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
@@ -34,7 +34,7 @@ formulario.addEventListener("submit", function (event) {
     body: datos,
   };
 
-  fetch(url, opFetch)
+  fetch(url + "/auth/register/", opFetch)
     .then(function (response) {
       if (!response) {
         throw new Error("Hubo un problema: " + response.statusText);
@@ -48,7 +48,6 @@ formulario.addEventListener("submit", function (event) {
     .catch(function (error) {
       console.log("error al realizar la solicitud: " + error);
     });
-  console.log(url);
 });
 document.addEventListener("DOMContentLoaded", function () {
   if (verificarSesion()) {
@@ -68,7 +67,6 @@ function verificarSesion() {
     return false;
   }
 }
-function verificarAdmin(){
-    var token = localStorage.getItem("token");
-    
+function verificarAdmin() {
+  var token = localStorage.getItem("token");
 }

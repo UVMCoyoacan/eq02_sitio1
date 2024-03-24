@@ -1,7 +1,7 @@
 var formulario = document.getElementById("login-form");
+const url = api.getUrl();
 
 formulario.addEventListener("submit", function (event) {
-  const url = "http://localhost:3977/api/v1" + "/auth/login/";
   event.preventDefault();
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
@@ -20,7 +20,7 @@ formulario.addEventListener("submit", function (event) {
     body: datos,
   };
 
-  fetch(url, opFetch)
+  fetch(url + "/auth/login/", opFetch)
     .then(function (response) {
       if (!response) {
         throw new Error("Hubo un problema: " + response.statusText);
@@ -43,15 +43,13 @@ formulario.addEventListener("submit", function (event) {
     });
 });
 document.addEventListener("DOMContentLoaded", function () {
-  const url = "http://localhost:3977/api/v1" + "/user/me/";
-
   if (verificarSesion()) {
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
     };
     axios
-      .get(url, { headers })
+      .get(url + "/user/me/", { headers })
       .then(function (response) {
         if (response.data.role === "admin") {
           window.location.href = "../sec_admin/admin.html";

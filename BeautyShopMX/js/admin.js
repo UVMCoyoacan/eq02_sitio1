@@ -1,6 +1,6 @@
 ///variables globales:
 var btnSelec = 0;
-
+const url = api.getUrl();
 function cerrarSesion() {
   //console.log("Cerrar sesion");
   localStorage.removeItem("token");
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "../index.html";
   }
   //verificar si es un admin o no
-  const url = "http://localhost:3977/api/v1" + "/user/me/";
 
   var opFetch = {
     method: "GET",
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  fetch(url, opFetch)
+  fetch(url + "/user/me/", opFetch)
     .then(function (response) {
       if (!response) {
         throw new Error("Hubo un problema: " + response.statusText);
@@ -114,7 +113,7 @@ function clickMenu(ind, botones) {
 async function misDatos() {
   document.getElementsByTagName("title")[0].innerHTML = "Mis datos";
   var datos = [];
-  const url = "http://localhost:3977/api/v1" + "/user/me/";
+
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -128,7 +127,7 @@ async function misDatos() {
   const contenedorHijo = document.createElement("div");
 
   axios
-    .get(url, { headers })
+    .get(url + "/user/me/", { headers })
     .then(function (response) {
       var datosPet = [];
       datosPet.push(response.data.firstname);
@@ -202,7 +201,6 @@ function agregarProducto() {
   formulario.appendChild(enviarBtn);
 
   formulario.addEventListener("submit", function (event) {
-    const urlGet = "http://localhost:3977/api/v1" + "/user/me/";
     event.preventDefault();
     if (verificarSesion()) {
       const token = localStorage.getItem("token");
@@ -210,11 +208,11 @@ function agregarProducto() {
         Authorization: `Bearer ${token}`,
       };
       axios
-        .get(urlGet, { headers })
+        .get(url + "/user/me/", { headers })
         .then(function (response) {
           if (response.data.role === "admin") {
             if (btnSelec === 1) {
-              const url = "http://localhost:3977/api/v1" + "/products/add/";
+              const url = Url + "/products/add/";
               const multipart = new FormData();
               const fileForm = document.getElementById("imagenProd");
               const tituloForm = document.getElementById("titulo").value;
@@ -223,7 +221,7 @@ function agregarProducto() {
               multipart.append("titulo", tituloForm);
               multipart.append("precio", precioForm);
               axios
-                .post(url, multipart, { headers })
+                .post(url + "/products/add", multipart, { headers })
                 .then(function (response) {
                   console.log(response.data);
                   const msgCont = document.createElement("div");

@@ -12,10 +12,10 @@ function cargarTienda() {
         var item = document.createElement("div");
         item.className = "Tienda-item";
         var titulo = document.createElement("H4");
-        titulo.className="Tienda-item-titulo";
+        titulo.className = "Tienda-item-titulo";
         titulo.innerHTML = productos[i].Titulo;
         var sub = document.createElement("h5");
-        sub.className="Tienda-item-precio";
+        sub.className = "Tienda-item-precio";
         sub.innerHTML = "$" + productos[i].Sub + " MXN";
         var img = document.createElement("img");
         img.className = "Producto-IMG";
@@ -31,10 +31,10 @@ function cargarTienda() {
   xhr.send();
 }
 function cargarTiendaApi() {
-  const url = "http://localhost:3977/api/v1" + "/products/";
+  const url = api.getUrl();
   const urlImg = "http://localhost:3977/";
   axios
-    .get(url)
+    .get(url + "/products/")
     .then(function (response) {
       var productos = response.data;
       const contenedor = document.getElementById("tnd");
@@ -43,9 +43,9 @@ function cargarTiendaApi() {
         item.className = "Tienda-item";
         var titulo = document.createElement("H4");
         titulo.innerHTML = productos[i].titulo;
-        titulo.className="Tienda-item-titulo";
+        titulo.className = "Tienda-item-titulo";
         var sub = document.createElement("h5");
-        sub.className="Tienda-item-precio";
+        sub.className = "Tienda-item-precio";
         sub.innerHTML = "$" + productos[i].precio + " MXN";
         var img = document.createElement("img");
         img.className = "Producto-IMG";
