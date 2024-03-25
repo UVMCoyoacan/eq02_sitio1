@@ -13,19 +13,26 @@ async function getProducts(req, res) {
 }
 async function addProduct(req, res) {
   try {
-    const { titulo, precio, imagen } = req.body;
+    const { titulo, precio } = req.body;
     const product = new Product({
       titulo: titulo,
       precio: precio,
       fecha: Date.now(),
-      imagen: imagen,
       active: true,
     });
     if (req.files.imagen) {
-      const imagePath = image.getImagePath(req.files.imagen);
-      product.imagen = imagePath;
+      var nuevasRutas={};
+      for(let i=0;i<req-files.imagen.length;i++)
+      {
+        const imagePath = image.getImagePath(req.files.imagen[i]);
+        var nuevaRuta={imagen:imagePath}
+        nuevasRutas.push(nuevaRuta)
+        
+      }
+      product.Rutas = nuevasRutas;
     }
     const productStorage = await product.save();
+    console.log(productStorage);
     res.status(200).send({ msg: "ok" });
   } catch (error) {
     console.log(error);

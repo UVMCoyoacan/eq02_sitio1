@@ -212,7 +212,6 @@ function agregarProducto() {
         .then(function (response) {
           if (response.data.role === "admin") {
             if (btnSelec === 1) {
-              const url = Url + "/products/add/";
               const multipart = new FormData();
               const fileForm = document.getElementById("imagenProd");
               const tituloForm = document.getElementById("titulo").value;
