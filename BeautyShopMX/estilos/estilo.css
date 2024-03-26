@@ -783,6 +783,39 @@ h3 {
     }  
     .lista-filtros{
         scale: 0.7;
-    } 
+    }
+    
+    .contenedor-pago{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contenedor-adeudo{
+        border-bottom:#000;
+
+        border-bottom-style: solid;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        text-align: center;
+    }
+
+    .cont-adeudo2{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        text-align: center;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .contenedor-hijo{
+        margin-top: 5vh;
+        text-align: center;
+    }
 
 }
