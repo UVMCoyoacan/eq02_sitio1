@@ -1,5 +1,5 @@
 ///variables globales:
-var btnSelec = 0;
+let btnSelec = 0;
 const url = api.getUrl();
 function cerrarSesion() {
   //console.log("Cerrar sesion");
@@ -65,6 +65,7 @@ function insertarMenu() {
     "Registrar deuda",
     "Registrar pago",
     "Buscar cliente",
+    "Cerrar Sesión",
   ];
 
   for (let i = 0; i < btnTitulos.length; i++) {
@@ -108,6 +109,8 @@ function clickMenu(ind, botones) {
     registrarPago();
   } else if (btnSelec === 4) {
     buscarCliente();
+  } else if (btnSelec === 5) {
+    cerrarSesion();
   }
 }
 async function misDatos() {
@@ -157,15 +160,15 @@ function agregarProducto() {
   const contenedor = document.getElementById("admin-cont");
   const p = document.createElement("h3");
   p.innerHTML = "Agregar un producto:";
-  p.className="addProductEnc";
+  p.className = "addProductEnc";
   contenedor.appendChild(p);
   const contenedorPadre = document.createElement("div");
-  contenedorPadre.className="contAddProduct";
+  contenedorPadre.className = "contAddProduct";
   contenedor.appendChild(contenedorPadre);
   //formulario
-  
+
   const contenedorHijo = document.createElement("div");
-  contenedorHijo.className="contAddProductForm";
+  contenedorHijo.className = "contAddProductForm";
   const formulario = document.createElement("form");
   formulario.id = "formulario";
   contenedorHijo.appendChild(formulario);
@@ -176,7 +179,7 @@ function agregarProducto() {
   formTitulo.type = "text";
   formTitulo.id = "titulo";
   formTitulo.name = "titulo";
-  formTitulo.className="form-elem";
+  formTitulo.className = "form-elem";
   formTitulo.required = true;
   formTitulo.placeholder = "Titulo del prodcuto";
   formulario.appendChild(formTitulo);
@@ -186,7 +189,7 @@ function agregarProducto() {
   formPrecio.type = "number";
   formPrecio.id = "precio";
   formPrecio.name = "precio";
-  formPrecio.className="form-elem";
+  formPrecio.className = "form-elem";
   formPrecio.required = true;
   formPrecio.placeholder = "Precio del prodcuto";
   formPrecio.min = 0;
@@ -197,7 +200,7 @@ function agregarProducto() {
   formImagen.type = "file";
   formImagen.id = "imagenProd";
   formImagen.name = "imagenProd";
-  formImagen.className="form-elem";
+  formImagen.className = "form-elem";
   formImagen.required = true;
   formImagen.placeholder = "Imagen del prodcuto";
   formImagen.accept = "image/*";
@@ -205,11 +208,11 @@ function agregarProducto() {
   formulario.appendChild(formImagen);
   formulario.appendChild(document.createElement("br"));
   //Categoria
-  nombresCategorias=api.getCategorias();
+  nombresCategorias = api.getCategorias();
   const listaCategoria = document.createElement("select");
   listaCategoria.name = "categoria";
   listaCategoria.id = "categoria";
-  listaCategoria.className="form-elem lista-productos";
+  listaCategoria.className = "form-elem lista-productos";
   listaCategoria.required = true;
   for (let i = 0; i < nombresCategorias.length; i++) {
     const opc = document.createElement("option");
@@ -225,8 +228,6 @@ function agregarProducto() {
   enviarBtn.value = "Subir producto";
   enviarBtn.className = "btn-principal";
   formulario.appendChild(enviarBtn);
-
-  
 
   formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -258,7 +259,7 @@ function agregarProducto() {
                 .then(function (response) {
                   //console.log(response.data);
                   const msgCont = document.createElement("div");
-                  msgCont.className="addProductResp";
+                  msgCont.className = "addProductResp";
                   contenedorPadre.appendChild(msgCont);
                   const msg = document.createElement("h5");
                   msg.innerHTML = `${tituloForm} se ha agregado exitosamente a la tienda`;
@@ -276,7 +277,6 @@ function agregarProducto() {
         });
     }
   });
-  
 }
 function registrarDeuda() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar deuda";
