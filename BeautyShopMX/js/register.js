@@ -74,10 +74,10 @@ function verificarAdmin() {
 
 repCont.addEventListener("input", function () {
   if (cont.value != repCont.value) {
-    repCont.className = "is-elem contError";
+    repCont.className = "form-elem contError";
     btn.disabled = true;
   } else {
-    repCont.className = "is-elem";
+    repCont.className = "form-elem";
     if (cb.checked && cont.value === repCont.value) {
       btn.disabled = false;
     }

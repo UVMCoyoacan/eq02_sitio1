@@ -48,3 +48,12 @@
                     </select>
                 </div>
             </div>
+
+
+            --fondoMenu: #EA858D;
+    --fondoBtnMenuHover: #D86C74;
+    --colorFondoMenu: #EDEDED;
+    --colorTextoMenuPie: #7A1E25;
+    --fondo: #FFC9CD;
+    --fondoInicioSesion: #FF9BA3;
+    --fonInicioSesionHover: #F55C68;

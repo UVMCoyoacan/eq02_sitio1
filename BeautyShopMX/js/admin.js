@@ -9,7 +9,7 @@ function cerrarSesion() {
 document.addEventListener("DOMContentLoaded", function () {
   //verificar si se tiene una sesion iniciada
   if (!verificarSesion()) {
-    window.location.href = "../index.html";
+    //window.location.href = "../index.html";
   }
   //verificar si es un admin o no
 
@@ -155,20 +155,28 @@ async function misDatos() {
 function agregarProducto() {
   document.getElementsByTagName("title")[0].innerHTML = "Agregar producto";
   const contenedor = document.getElementById("admin-cont");
-  const p = document.createElement("p");
-  p.innerHTML = "Este es el contenido de agregar producto";
+  const p = document.createElement("h3");
+  p.innerHTML = "Agregar un producto:";
+  p.className="addProductEnc";
   contenedor.appendChild(p);
+  const contenedorPadre = document.createElement("div");
+  contenedorPadre.className="contAddProduct";
+  contenedor.appendChild(contenedorPadre);
   //formulario
+  
   const contenedorHijo = document.createElement("div");
+  contenedorHijo.className="contAddProductForm";
   const formulario = document.createElement("form");
   formulario.id = "formulario";
   contenedorHijo.appendChild(formulario);
-  contenedor.appendChild(contenedorHijo);
+  contenedorPadre.appendChild(contenedorHijo);
+
   //Titulo producto
   const formTitulo = document.createElement("input");
   formTitulo.type = "text";
   formTitulo.id = "titulo";
   formTitulo.name = "titulo";
+  formTitulo.className="form-elem";
   formTitulo.required = true;
   formTitulo.placeholder = "Titulo del prodcuto";
   formulario.appendChild(formTitulo);
@@ -178,21 +186,18 @@ function agregarProducto() {
   formPrecio.type = "number";
   formPrecio.id = "precio";
   formPrecio.name = "precio";
+  formPrecio.className="form-elem";
   formPrecio.required = true;
   formPrecio.placeholder = "Precio del prodcuto";
   formPrecio.min = 0;
   formulario.appendChild(formPrecio);
   formulario.appendChild(document.createElement("br"));
   //Imagen producto
-  const formImagenlb = document.createElement("label");
-  formImagenlb.for = "imagenProd";
-  formImagenlb.innerHTML = "Selecciona la imagen para el producto";
-  formulario.appendChild(formImagenlb);
-  formulario.appendChild(document.createElement("br"));
   const formImagen = document.createElement("input");
   formImagen.type = "file";
   formImagen.id = "imagenProd";
   formImagen.name = "imagenProd";
+  formImagen.className="form-elem";
   formImagen.required = true;
   formImagen.placeholder = "Imagen del prodcuto";
   formImagen.accept = "image/*";
@@ -200,16 +205,11 @@ function agregarProducto() {
   formulario.appendChild(formImagen);
   formulario.appendChild(document.createElement("br"));
   //Categoria
-  const nombresCategorias = [
-    "Ropa",
-    "Maquillaje",
-    "Skincare",
-    "Zapatos",
-    "Accesorios",
-  ];
+  nombresCategorias=api.getCategorias();
   const listaCategoria = document.createElement("select");
   listaCategoria.name = "categoria";
   listaCategoria.id = "categoria";
+  listaCategoria.className="form-elem lista-productos";
   listaCategoria.required = true;
   for (let i = 0; i < nombresCategorias.length; i++) {
     const opc = document.createElement("option");
@@ -223,8 +223,10 @@ function agregarProducto() {
   const enviarBtn = document.createElement("input");
   enviarBtn.type = "submit";
   enviarBtn.value = "Subir producto";
-  enviarBtn.className = "btn_contacto_enviar";
+  enviarBtn.className = "btn-principal";
   formulario.appendChild(enviarBtn);
+
+  
 
   formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -256,9 +258,10 @@ function agregarProducto() {
                 .then(function (response) {
                   //console.log(response.data);
                   const msgCont = document.createElement("div");
-                  contenedor.appendChild(msgCont);
-                  const msg = document.createElement("h2");
-                  msg.innerHTML = `El producto "${tituloForm}" se ha agregado exitosamente`;
+                  msgCont.className="addProductResp";
+                  contenedorPadre.appendChild(msgCont);
+                  const msg = document.createElement("h5");
+                  msg.innerHTML = `${tituloForm} se ha agregado exitosamente a la tienda`;
                   msgCont.appendChild(msg);
                   formulario.reset();
                 })
@@ -273,6 +276,7 @@ function agregarProducto() {
         });
     }
   });
+  
 }
 function registrarDeuda() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar deuda";

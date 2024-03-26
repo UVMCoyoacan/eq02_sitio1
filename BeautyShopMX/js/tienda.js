@@ -1,3 +1,5 @@
+
+
 function cargarTienda() {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "../sec_tienda/productos.json", true);
@@ -47,12 +49,15 @@ function cargarTienda() {
   };
   xhr.send();
 }
-function cargarTiendaApi() {
+function cargarTiendaApi(ordenar,filtro) {
+  if(filtro==="Todos"){filtro=""}
+  const ordenarPor=obtenerFiltros(ordenar);
   const url = api.getUrl();
   const urlImg = api.getUrlImg();
   const params = {
     active: true,
-    //nombre: "asc",
+    ordenar: ordenarPor,
+    filtro:filtro,
   };
   axios
     .get(url + "/products/", { params: params })
@@ -105,32 +110,7 @@ function cargarTiendaApi() {
       console.log(error);
     });
 }
-function ordenarTitulo(productos, orden) {
-  if (orden === 1) {
-    productos.sort((a, b) => {
-      const ta = a.Titulo.toLowerCase();
-      const tb = b.Titulo.toLowerCase();
-      if (ta < tb) {
-        return -1;
-      } else if (ta > tb) {
-        return 1;
-      }
-      return 0;
-    });
-  } else if (orden === -1) {
-    productos.sort((a, b) => {
-      const ta = a.Titulo.toLowerCase();
-      const tb = b.Titulo.toLowerCase();
-      if (ta < tb) {
-        return 1;
-      } else if (ta > tb) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-  return productos;
-}
+
 function cambiarImg(rutasImg, tipo, rutaActual, imagen) {
   const fileSplit = rutaActual.split("/");
   const rutaDefActual = `../${fileSplit[4]}/${fileSplit[5]}/${fileSplit[6]}`;
@@ -177,3 +157,94 @@ function cambiarImgApi(rutasImg, tipo, rutaActual, imagen) {
   }
   imagen.src = urlImg + `/${rutasImg[i]}`;
 }
+function cargarFiltros()
+{
+  const categorias=api.getCategorias();
+  const ordenarPor=api.getOrdenarPor();
+  const contenedor=document.getElementById("tienda-filtros");
+  //////////lista categorias
+  const cont1=document.createElement("div");
+  const listaCat=document.createElement("select");
+  listaCat.className="form-elem lista-filtros";
+  listaCat.id="listaCat";
+  for(let i=0;i<categorias.length;i++)
+  {
+    const op=document.createElement("option");
+    op.innerHTML=categorias[i];
+    op.value=categorias[i];
+    listaCat.appendChild(op);
+  }
+  cont1.appendChild(listaCat);
+  contenedor.appendChild(cont1);
+  //////////////lista ordenar
+  const cont2=document.createElement("div");
+  const listaOrd=document.createElement("select");
+  listaOrd.className="form-elem lista-filtros";
+  listaOrd.id="listaOrd";
+  for(let i=0;i<ordenarPor.length;i++)
+  {
+    const op=document.createElement("option");
+    op.innerHTML=ordenarPor[i];
+    op.value=i;
+    listaOrd.appendChild(op);
+  }
+  cont2.appendChild(listaOrd);
+  contenedor.appendChild(cont2);
+  listaOrd.addEventListener("change", function(){
+    cargarTiendaApi(listaOrd.sele,listaCat.value);
+  });
+  listaCat.addEventListener("change", function(){
+    cargarTiendaApi(listaOrd.value,listaCat.value);
+  });
+  
+}
+
+
+function ordenarTitulo(productos, orden) {
+  if (orden === 1) {
+    productos.sort((a, b) => {
+      const ta = a.Titulo.toLowerCase();
+      const tb = b.Titulo.toLowerCase();
+      if (ta < tb) {
+        return -1;
+      } else if (ta > tb) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if (orden === -1) {
+    productos.sort((a, b) => {
+      const ta = a.Titulo.toLowerCase();
+      const tb = b.Titulo.toLowerCase();
+      if (ta < tb) {
+        return 1;
+      } else if (ta > tb) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  return productos;
+}
+
+
+function obtenerFiltros(ordenar)
+{
+  let respuesta;
+  switch (ordenar){
+    case 0:
+      respuesta={"fecha":"desc"};
+      break;
+    case 1:
+      respuesta={"fecha":"asc"};
+      break;
+    case 2:
+      respuesta={"precio":"asc"};
+      break;
+    case 3:
+      respuesta={"precio":"desc"};
+      break;
+  }
+  return respuesta;
+}
+

@@ -13,7 +13,7 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     
-    <body onload="cargarTiendaApi(); insertarMenus();">
+    <body>
         <!--Menu -->
         <header class="nav-header" id="menu">
             
@@ -21,7 +21,10 @@
         <!--Contenido de página index -->
         <div class="Cuerpo">
             <!--Seccion 1 -->
-            
+            <div class="Seccion">
+                <div class="tienda-filtros" id="tienda-filtros">        
+                </div>
+            </div>
             <!--Seccion 2 tienda -->
             <div class="Seccion">
                 <div class="Tienda" id="tnd">
@@ -32,5 +35,10 @@
         <footer class="nav-header footer" id="menu-footer">
             
         </footer>
+        <script>
+            insertarMenus();
+            cargarFiltros();
+            cargarTiendaApi(0);
+        </script>
     </body>
 </html>

@@ -4,6 +4,20 @@ const api = (function () {
   //let url = "http://localhost:3977/api/v1";
   let url = "http://localhost:3977/api/v1";
   let urlIMG = "http://localhost:3977/";
+  const categorias = [
+    "Todos",
+    "Ropa",
+    "Maquillaje",
+    "Skincare",
+    "Zapatos",
+    "Accesorios",
+  ];
+  const ordenarPor = [
+    "Fecha: mas recientes primero",
+    "Fecha: mas antiguos primero",
+    "Precio: de menor a mayor",
+    "Precio: de mayor a menor",
+  ];
 
   // Lo que deseas exponer públicamente
   return {
@@ -13,5 +27,11 @@ const api = (function () {
     getUrlImg: function () {
       return urlIMG;
     },
+    getCategorias:function(){
+      return categorias;
+    },
+    getOrdenarPor:function(){
+      return ordenarPor;
+    }
   };
 })();

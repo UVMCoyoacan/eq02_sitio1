@@ -6,6 +6,16 @@
     --fondo: #FFC9CD;
     --fondoInicioSesion: #FF9BA3;
     --fonInicioSesionHover: #F55C68;
+
+    --fondoMenu: #EA858D;
+    --fondoPagina:#FFC9CD;
+    --fondoMenuHover:#D86C74;
+    --btnPrincipal:#F55C68;
+    --btnPrincipalHover:#eb4957;
+    --fondoItems:#FF9BA3;
+    --fondoItemsHover:#D86C74;
+
+
 }
 
 * {
@@ -128,7 +138,7 @@ body {
 }
 
 .nav-link:hover {
-    background-color: var(--fondoBtnMenuHover);
+    background-color: var(--fondoMenuHover);
 }
 
 .footer-contacto {
@@ -160,7 +170,7 @@ body {
 }
 
 .nav-link2:hover {
-    background-color: var(--fondoBtnMenuHover);
+    background-color: var(--fondoMenuHover);
 }
 
 .Cuerpo {
@@ -216,7 +226,7 @@ body {
     grid-row: 1;
     width: 100%;
     text-align: center;
-    margin-bottom: 10px;
+    
 }
 
 .s2-titulo h1,
@@ -224,9 +234,7 @@ h3 {
     margin-bottom: 15px;
 }
 
-#btn_tienda {
-    background-color: var(--fondoBtnMenuHover);
-}
+
 
 .items {
     grid-column: 1/4;
@@ -246,7 +254,7 @@ h3 {
     padding: 10px;
     align-items: center;
     text-align: center;
-    background-color: var(--fondoBtnMenuHover);
+    background-color: var(--fondoItems);
     border-radius: 12px;
     transition: 0.3s ease-out;
     height: 100%;
@@ -333,28 +341,15 @@ h3 {
 
 .contacto-elem {
     width: 100%;
-    background-color: var(--fondoMenu);
-    color: var(--colorFondoMenu);
+   background-color: var(--fondoItems);
     border-radius: 6px;
     margin: 10px 0;
-    border-color: var(--colorTextoMenuPie);
 }
 
 .txt-area {
-    height: 200px;
+    height: 30vh !important;
 }
 
-.btn_contacto_enviar {
-    padding: 5px 40px;
-    background-color: var(--fondoMenu);
-    border-radius: 6px;
-    border-color: var(--colorTextoMenuPie);
-    margin-top: 8px;
-}
-
-.btn_contacto_enviar:hover {
-    background-color: var(--fondoBtnMenuHover);
-}
 
 .Tienda {
     width: 100%;
@@ -378,7 +373,7 @@ h3 {
     grid-template-rows: 1fr 1fr;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--fondoMenu);
+    background-color: var(--fondoItems);
     border-radius: 6px;
     text-align: right;
     padding: 0 1vh;
@@ -409,7 +404,7 @@ h3 {
 }
 
 .Tienda-item:hover {
-    background-color: var(--fondoBtnMenuHover);
+    background-color: var(--fondoItemsHover);
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     --state-dot:scale(1);
@@ -448,7 +443,7 @@ h3 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: var(--fondoInicioSesion);
+    background-color: var(--fondoItems);
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     display: grid;
@@ -457,8 +452,8 @@ h3 {
 
 }
 
-.is-elem {
-    background-color: var(--fonInicioSesionHover);
+.form-elem {
+    background-color: var(--btnPrincipal);
     width: 100%;
     border-radius: 6px;
     margin-bottom: 8px;
@@ -469,13 +464,19 @@ h3 {
     height: 32px;
 }
 
-.is-elem:focus {
-    background-color: var(--fonInicioSesionHover);
+.form-elem:focus {
+    background-color: var(--btnPrincipalHover);
     color: var(--colorFondoMenu)
 }
 
-.is-elem::placeholder {
+.form-elem::placeholder {
     color: var(--colorFondoMenu);
+}
+.addProductEnc
+{
+    padding-bottom: 10px;
+    border-bottom:2px black;
+    border-bottom-style:solid;
 }
 
 .cb {
@@ -520,7 +521,7 @@ h3 {
 }
 
 .Submenu {
-    background-color: var(--fondoMenu);
+    background-color: var(--btnPrincipal);
     display: grid;
     border-radius: 6px;
     margin: 0;
@@ -528,19 +529,19 @@ h3 {
 }
 
 .btn-principal {
-    background-color: var(--fondoMenu);
-    border-style: solid;
+    background-color: var(--btnPrincipal);
     border-color: var(--colorTextoMenuPie);
     border-radius: 6px;
-    height: auto;
     color: var(--colorTextoMenuPie);
-    margin: 5%;
-    min-width: 20%;
+    color:var(--colorFondoMenu);
+    border-style: none;
+    padding: 1vh 3vh;
+    margin:  1vh 0;
 }
 
 .btn-principal:hover,
 .btn-principal-selected {
-    background-color: var(--fondoBtnMenuHover);
+    background-color: var(--btnPrincipalHover);
 }
 
 .Submenu-lista {
@@ -553,7 +554,7 @@ h3 {
 .Submenu-item {
     grid-row: 1;
 }
-.is-elem:disabled{
+.form-elem:disabled{
     opacity: 0.6;
 }
 .contError{
@@ -678,7 +679,7 @@ h3 {
         grid-template-rows: 3fr 1fr 1fr;
         align-items: center;
         justify-content: space-between;
-        background-color: var(--fondoMenu);
+        background-color: var(--fondoItems);
         border-radius: 6px;
         text-align: center;
         padding: 0 1vh;
@@ -717,7 +718,7 @@ h3 {
         align-items: center;
         justify-content: center;
         text-align: center;
-        background-color: var(--fondoInicioSesion);
+        background-color: var(--fondoItems);
         border-radius: 12px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         display: grid;
@@ -750,6 +751,38 @@ h3 {
     .dot-der{
         margin-left: 87%;
         transform:var(--state-dot);
-    }    
+    }
+    .lista-productos{
+        justify-items: center;
+    }
+    .contAddProduct{
+        width:100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .contAddProductForm{
+        width: 90%;
+        grid-column: 1;
+        grid-row: 1;
+        margin: 0 5%;
+    }
+    .addProductResp{
+        grid-column: 2;
+        grid-row: 1;
+        width: 90%;
+        margin: 0 5%;
+        text-align: center;
+    }
+    .tienda-filtros{
+        width:30%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        margin-left: 70%;
+        gap: 1vh;
+    }  
+    .lista-filtros{
+        scale: 0.7;
+    } 
 
 }
