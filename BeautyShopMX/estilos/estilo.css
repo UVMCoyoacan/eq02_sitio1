@@ -553,6 +553,12 @@ h3 {
 .Submenu-item {
     grid-row: 1;
 }
+.is-elem:disabled{
+    opacity: 0.6;
+}
+.contError{
+    background-color:crimson;
+}
 
 @media (min-width:900px) {
     .nav {

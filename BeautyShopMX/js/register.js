@@ -1,15 +1,16 @@
 const url = api.getUrl();
+const btn = document.getElementById("btn_registrarse");
+const repCont = document.getElementById("passwordRep");
+const cont = document.getElementById("password");
+const cb = document.getElementById("terminos");
 function isAcepted() {
-  const cb = document.getElementById("terminos");
-  const btn = document.getElementById("btn_registrarse");
-
-  if (cb.checked) {
+  if (cb.checked && cont.value == repCont.value) {
     btn.disabled = false;
   } else {
     btn.disabled = true;
   }
 }
-var formulario = document.getElementById("formulario-registrarse");
+const formulario = document.getElementById("formulario-registrarse");
 
 formulario.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -70,3 +71,21 @@ function verificarSesion() {
 function verificarAdmin() {
   var token = localStorage.getItem("token");
 }
+
+repCont.addEventListener("input", function () {
+  if (cont.value != repCont.value) {
+    repCont.className = "is-elem contError";
+    btn.disabled = true;
+  } else {
+    repCont.className = "is-elem";
+    if (cb.checked && cont.value === repCont.value) {
+      btn.disabled = false;
+    }
+  }
+});
+cont.addEventListener("change", function () {
+  if (cont.value == "") {
+    repCont.disabled = true;
+  }
+  repCont.disabled = false;
+});
