@@ -2,13 +2,15 @@ const Product = require("../models/product");
 const image = require("../utils/image");
 
 async function getProducts(req, res) {
-  const { active,ordenar,filtro } = req.query;
+  const { active, ordenar, filtro } = req.query;
+  console.log(req.query);
   let response = null;
   if (!req.query) {
     response = await Product.find();
   } else if (active) {
     //response = await Product.find({ active });
-    response = await Product.find({ active },{ categoria: filtro }).sort(ordenar);
+
+    response = await Product.find({ active });
   }
   res.status(200).send(response);
 }

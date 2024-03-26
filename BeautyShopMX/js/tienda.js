@@ -1,5 +1,3 @@
-
-
 function cargarTienda() {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "../sec_tienda/productos.json", true);
@@ -49,15 +47,14 @@ function cargarTienda() {
   };
   xhr.send();
 }
-function cargarTiendaApi(ordenar,filtro) {
-  if(filtro==="Todos"){filtro=""}
-  const ordenarPor=obtenerFiltros(ordenar);
+function cargarTiendaApi(ordenar, filtro) {
+  //const ordenarPor = obtenerFiltros(ordenar);
   const url = api.getUrl();
   const urlImg = api.getUrlImg();
   const params = {
     active: true,
-    ordenar: ordenarPor,
-    filtro:filtro,
+    ordenar: ordenar,
+    filtro: filtro,
   };
   axios
     .get(url + "/products/", { params: params })
@@ -157,48 +154,43 @@ function cambiarImgApi(rutasImg, tipo, rutaActual, imagen) {
   }
   imagen.src = urlImg + `/${rutasImg[i]}`;
 }
-function cargarFiltros()
-{
-  const categorias=api.getCategorias();
-  const ordenarPor=api.getOrdenarPor();
-  const contenedor=document.getElementById("tienda-filtros");
+function cargarFiltros() {
+  const categorias = api.getCategorias();
+  const ordenarPor = api.getOrdenarPor();
+  const contenedor = document.getElementById("tienda-filtros");
   //////////lista categorias
-  const cont1=document.createElement("div");
-  const listaCat=document.createElement("select");
-  listaCat.className="form-elem lista-filtros";
-  listaCat.id="listaCat";
-  for(let i=0;i<categorias.length;i++)
-  {
-    const op=document.createElement("option");
-    op.innerHTML=categorias[i];
-    op.value=categorias[i];
+  const cont1 = document.createElement("div");
+  const listaCat = document.createElement("select");
+  listaCat.className = "form-elem lista-filtros";
+  listaCat.id = "listaCat";
+  for (let i = 0; i < categorias.length; i++) {
+    const op = document.createElement("option");
+    op.innerHTML = categorias[i];
+    op.value = categorias[i];
     listaCat.appendChild(op);
   }
   cont1.appendChild(listaCat);
   contenedor.appendChild(cont1);
   //////////////lista ordenar
-  const cont2=document.createElement("div");
-  const listaOrd=document.createElement("select");
-  listaOrd.className="form-elem lista-filtros";
-  listaOrd.id="listaOrd";
-  for(let i=0;i<ordenarPor.length;i++)
-  {
-    const op=document.createElement("option");
-    op.innerHTML=ordenarPor[i];
-    op.value=i;
+  const cont2 = document.createElement("div");
+  const listaOrd = document.createElement("select");
+  listaOrd.className = "form-elem lista-filtros";
+  listaOrd.id = "listaOrd";
+  for (let i = 0; i < ordenarPor.length; i++) {
+    const op = document.createElement("option");
+    op.innerHTML = ordenarPor[i];
+    op.value = i;
     listaOrd.appendChild(op);
   }
   cont2.appendChild(listaOrd);
   contenedor.appendChild(cont2);
-  listaOrd.addEventListener("change", function(){
-    cargarTiendaApi(listaOrd.sele,listaCat.value);
+  listaOrd.addEventListener("change", function () {
+    cargarTiendaApi(listaOrd.sele, listaCat.value);
   });
-  listaCat.addEventListener("change", function(){
-    cargarTiendaApi(listaOrd.value,listaCat.value);
+  listaCat.addEventListener("change", function () {
+    cargarTiendaApi(listaOrd.value, listaCat.value);
   });
-  
 }
-
 
 function ordenarTitulo(productos, orden) {
   if (orden === 1) {
@@ -227,24 +219,21 @@ function ordenarTitulo(productos, orden) {
   return productos;
 }
 
-
-function obtenerFiltros(ordenar)
-{
+function obtenerFiltros(ordenar) {
   let respuesta;
-  switch (ordenar){
+  switch (ordenar) {
     case 0:
-      respuesta={"fecha":"desc"};
+      respuesta = { fecha: "desc" };
       break;
     case 1:
-      respuesta={"fecha":"asc"};
+      respuesta = { fecha: "asc" };
       break;
     case 2:
-      respuesta={"precio":"asc"};
+      respuesta = { precio: "asc" };
       break;
     case 3:
-      respuesta={"precio":"desc"};
+      respuesta = { precio: "desc" };
       break;
   }
   return respuesta;
 }
-
