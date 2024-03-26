@@ -4,11 +4,11 @@ function cargarTienda() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const datos = JSON.parse(xhr.responseText);
-      var productos = datos.Productos;
+      let productos = datos.Productos;
       productos = ordenarTitulo(productos, 0);
       const contenedor = document.getElementById("tnd");
       for (let i = 0; i < productos.length; i++) {
-         item = document.createElement("div");
+        item = document.createElement("div");
         item.className = "Tienda-item";
         const titulo = document.createElement("H4");
         titulo.className = "Tienda-item-titulo";
@@ -18,9 +18,8 @@ function cargarTienda() {
         sub.innerHTML = "$" + productos[i].Sub + " MXN";
         const img = document.createElement("img");
         img.className = "Producto-IMG";
-        var rutasIMG=[];
-        for(let j=0;j<productos[i].Rutas.length;j++)
-        {
+        let rutasIMG = [];
+        for (let j = 0; j < productos[i].Rutas.length; j++) {
           rutasIMG.push(productos[i].Rutas[j].ruta);
         }
         img.src = rutasIMG[0];
@@ -29,18 +28,20 @@ function cargarTienda() {
         item.appendChild(sub);
         contenedor.appendChild(item);
         ///controles imagenes
-        const ant =document.createElement("button");
-        ant.className="btn-dot dot-izq";
-        ant.innerHTML="❮";
-        ant.onclick=function(){cargarImg(rutasIMG,0,img.src,img);};
-        const sig =document.createElement("button");
-        sig.className="btn-dot dot-der";
-        sig.innerHTML="❯";
-        sig.onclick=function(){cargarImg(rutasIMG,1,img.src,img);};
+        const ant = document.createElement("button");
+        ant.className = "btn-dot dot-izq";
+        ant.innerHTML = "❮";
+        ant.onclick = function () {
+          cambiarImg(rutasIMG, 0, img.src, img);
+        };
+        const sig = document.createElement("button");
+        sig.className = "btn-dot dot-der";
+        sig.innerHTML = "❯";
+        sig.onclick = function () {
+          cambiarImg(rutasIMG, 1, img.src, img);
+        };
         item.appendChild(ant);
         item.appendChild(sig);
-
-        
       }
     }
   };
@@ -49,8 +50,12 @@ function cargarTienda() {
 function cargarTiendaApi() {
   const url = api.getUrl();
   const urlImg = api.getUrlImg();
+  const params = {
+    active: true,
+    //nombre: "asc",
+  };
   axios
-    .get(url + "/products/")
+    .get(url + "/products/", { params: params })
     .then(function (response) {
       const productos = response.data;
       const contenedor = document.getElementById("tnd");
@@ -65,10 +70,10 @@ function cargarTiendaApi() {
         sub.innerHTML = "$" + productos[i].precio + " MXN";
         const img = document.createElement("img");
         img.className = "Producto-IMG";
-        var rutasIMG=[];
-        for(let j=0;j<productos[i].Rutas.length;j++)
-        {
-          rutasIMG.push(productos[i].Rutas[j].imagen);
+        let rutasIMG = [];
+
+        for (let j = 0; j < Object.keys(productos[i].rutas).length; j++) {
+          rutasIMG.push(productos[i].rutas[j].imagen);
         }
         img.src = urlImg + rutasIMG[0];
         item.appendChild(img);
@@ -77,17 +82,23 @@ function cargarTiendaApi() {
 
         contenedor.appendChild(item);
 
-         ///controles imagenes
-         const ant =document.createElement("button");
-         ant.className="btn-dot dot-izq";
-         ant.innerHTML="❮";
-         ant.onclick=function(){cargarImg(rutasIMG,0,img.src,img);};
-         const sig =document.createElement("button");
-         sig.className="btn-dot dot-der";
-         sig.innerHTML="❯";
-         sig.onclick=function(){cargarImg(rutasIMG,1,img.src,img);};
-         item.appendChild(ant);
-         item.appendChild(sig);
+        ///controles imagenes
+        const ant = document.createElement("button");
+        ant.className = "btn-dot dot-izq";
+        ant.innerHTML = "❮";
+        ant.onclick = function () {
+          cambiarImgApi(rutasIMG, 0, img.src, img);
+        };
+        const sig = document.createElement("button");
+        sig.className = "btn-dot dot-der";
+        sig.innerHTML = "❯";
+        sig.onclick = function () {
+          cambiarImgApi(rutasIMG, 1, img.src, img);
+        };
+        if (rutasIMG.length > 1) {
+          item.appendChild(ant);
+          item.appendChild(sig);
+        }
       }
     })
     .catch(function (error) {
@@ -120,31 +131,49 @@ function ordenarTitulo(productos, orden) {
   }
   return productos;
 }
-function cargarImg(rutasImg,tipo,rutaActual,imagen)
-{
+function cambiarImg(rutasImg, tipo, rutaActual, imagen) {
   const fileSplit = rutaActual.split("/");
-  const rutaDefActual=`../${fileSplit[4]}/${fileSplit[5]}/${fileSplit[6]}`;
+  const rutaDefActual = `../${fileSplit[4]}/${fileSplit[5]}/${fileSplit[6]}`;
 
   const isInArreglo = (element) => element === rutaDefActual;
-  let i=rutasImg.findIndex(isInArreglo);
-  if(tipo===0)
-  {
-    if(i<=0){
-      i=rutasImg.length-1;
-    }
-    else{
+  let i = rutasImg.findIndex(isInArreglo);
+  if (tipo === 0) {
+    if (i <= 0) {
+      i = rutasImg.length - 1;
+    } else {
       i--;
-    } 
-  }
-  else{
-    if(i>=rutasImg.length-1){
-      i=0;
     }
-    else{
+  } else {
+    if (i >= rutasImg.length - 1) {
+      i = 0;
+    } else {
       i++;
-    } 
+    }
   }
 
-  imagen.src=rutasImg[i];
+  imagen.src = rutasImg[i];
 }
+function cambiarImgApi(rutasImg, tipo, rutaActual, imagen) {
+  const urlImg = api.getUrlImg();
+  const fileSplit = rutaActual.split("/");
+  const rutaDefActual = `${fileSplit[fileSplit.length - 2]}/${
+    fileSplit[fileSplit.length - 1]
+  }`;
 
+  const isInArreglo = (element) => element === rutaDefActual;
+  let i = rutasImg.findIndex(isInArreglo);
+  if (tipo === 0) {
+    if (i <= 0) {
+      i = rutasImg.length - 1;
+    } else {
+      i--;
+    }
+  } else {
+    if (i >= rutasImg.length - 1) {
+      i = 0;
+    } else {
+      i++;
+    }
+  }
+  imagen.src = urlImg + `/${rutasImg[i]}`;
+}

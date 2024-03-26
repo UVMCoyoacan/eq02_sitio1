@@ -158,11 +158,13 @@ function agregarProducto() {
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de agregar producto";
   contenedor.appendChild(p);
+  //formulario
   const contenedorHijo = document.createElement("div");
   const formulario = document.createElement("form");
   formulario.id = "formulario";
   contenedorHijo.appendChild(formulario);
   contenedor.appendChild(contenedorHijo);
+  //Titulo producto
   const formTitulo = document.createElement("input");
   formTitulo.type = "text";
   formTitulo.id = "titulo";
@@ -171,6 +173,7 @@ function agregarProducto() {
   formTitulo.placeholder = "Titulo del prodcuto";
   formulario.appendChild(formTitulo);
   formulario.appendChild(document.createElement("br"));
+  //precio producto
   const formPrecio = document.createElement("input");
   formPrecio.type = "number";
   formPrecio.id = "precio";
@@ -180,6 +183,7 @@ function agregarProducto() {
   formPrecio.min = 0;
   formulario.appendChild(formPrecio);
   formulario.appendChild(document.createElement("br"));
+  //Imagen producto
   const formImagenlb = document.createElement("label");
   formImagenlb.for = "imagenProd";
   formImagenlb.innerHTML = "Selecciona la imagen para el producto";
@@ -192,8 +196,30 @@ function agregarProducto() {
   formImagen.required = true;
   formImagen.placeholder = "Imagen del prodcuto";
   formImagen.accept = "image/*";
+  formImagen.multiple = true;
   formulario.appendChild(formImagen);
   formulario.appendChild(document.createElement("br"));
+  //Categoria
+  const nombresCategorias = [
+    "Ropa",
+    "Maquillaje",
+    "Skincare",
+    "Zapatos",
+    "Accesorios",
+  ];
+  const listaCategoria = document.createElement("select");
+  listaCategoria.name = "categoria";
+  listaCategoria.id = "categoria";
+  listaCategoria.required = true;
+  for (let i = 0; i < nombresCategorias.length; i++) {
+    const opc = document.createElement("option");
+    opc.value = nombresCategorias[i];
+    opc.innerHTML = nombresCategorias[i];
+    listaCategoria.appendChild(opc);
+  }
+  formulario.appendChild(listaCategoria);
+  formulario.appendChild(document.createElement("br"));
+  //boton enviar
   const enviarBtn = document.createElement("input");
   enviarBtn.type = "submit";
   enviarBtn.value = "Subir producto";
@@ -216,13 +242,19 @@ function agregarProducto() {
               const fileForm = document.getElementById("imagenProd");
               const tituloForm = document.getElementById("titulo").value;
               const precioForm = document.getElementById("precio").value;
-              multipart.append("imagen", fileForm.files[0]);
+              const categoria = document.getElementById("categoria").value;
+
+              for (let i = 0; i < fileForm.files.length; i++) {
+                multipart.append(`file${i}`, fileForm.files[i]);
+              }
+
               multipart.append("titulo", tituloForm);
               multipart.append("precio", precioForm);
+              multipart.append("categoria", categoria);
               axios
                 .post(url + "/products/add", multipart, { headers })
                 .then(function (response) {
-                  console.log(response.data);
+                  //console.log(response.data);
                   const msgCont = document.createElement("div");
                   contenedor.appendChild(msgCont);
                   const msg = document.createElement("h2");

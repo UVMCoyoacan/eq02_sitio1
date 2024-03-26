@@ -25,3 +25,26 @@
         </footer>
     </body>
 </html>
+
+
+
+<div class="Seccion">
+                <div class="filtros-tienda">
+                    <select name="filtro" id="filtro">
+                        <option value="Nombre-asc">Nombre: A-Z</option>
+                        <option value="Nombre-desc">Nombre: Z-A</option>
+                        <option value="Precio-asc">Precio: Mas baratos primero</option>
+                        <option value="Precio-desc">Precio: Mas caros primero</option>
+                        <option value="Fecha-asc">Fecha: Mas antiguos primero</option>
+                        <option value="Fecha-desc">Fecha: Mas nuevos primero</option>
+                    </select>
+                    <select name="categoria" id="categoria">
+                        <option value="Todos">Todos</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Maquillaje">Maquillaje</option>
+                        <option value="Skincare">Skincare</option>
+                        <option value="Zapatos">Zapatos</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                </div>
+            </div>

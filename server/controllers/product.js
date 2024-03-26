@@ -2,37 +2,41 @@ const Product = require("../models/product");
 const image = require("../utils/image");
 
 async function getProducts(req, res) {
-  const { active } = req.query;
+  const { active, nombre, precio, fecha, categoria } = req.query;
   let response = null;
-  if (active === undefined) {
+  if (!req.query) {
     response = await Product.find();
-  } else {
+  } else if (active) {
     response = await Product.find({ active });
+    if (nombre) {
+      response = await Product.find({ active }).sort({ titulo: nombre });
+    }
   }
   res.status(200).send(response);
 }
 async function addProduct(req, res) {
   try {
-    const { titulo, precio } = req.body;
+    const { titulo, precio, categoria } = req.body;
     const product = new Product({
       titulo: titulo,
       precio: precio,
+      rutas: [],
       fecha: Date.now(),
+      categoria: categoria,
       active: true,
     });
-    if (req.files.imagen) {
-      var nuevasRutas={};
-      for(let i=0;i<req-files.imagen.length;i++)
-      {
-        const imagePath = image.getImagePath(req.files.imagen[i]);
-        var nuevaRuta={imagen:imagePath}
-        nuevasRutas.push(nuevaRuta)
-        
+
+    if (req.files) {
+      var nuevasRutas = [];
+      for (let i = 0; i < Object.keys(req.files).length; i++) {
+        const imagePath = image.getImagePath(req.files[`file${i}`]);
+        var nuevaRuta = { imagen: imagePath };
+        nuevasRutas.push(nuevaRuta);
       }
-      product.Rutas = nuevasRutas;
+      product.rutas = nuevasRutas;
     }
     const productStorage = await product.save();
-    console.log(productStorage);
+    //console.log(productStorage);
     res.status(200).send({ msg: "ok" });
   } catch (error) {
     console.log(error);

@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const ProductSchema = mongoose.Schema({
   titulo: String,
   precio: Number,
-  Rutas:[
+  rutas: [
     {
       imagen: String,
-    }
+    },
   ],
-  
+  categoria: String,
   fecha: Date,
   active: Boolean,
 });
