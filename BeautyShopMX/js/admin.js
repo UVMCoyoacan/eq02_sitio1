@@ -9,7 +9,7 @@ function cerrarSesion() {
 document.addEventListener("DOMContentLoaded", function () {
   //verificar si se tiene una sesion iniciada
   if (!verificarSesion()) {
-    //window.location.href = "../index.html";
+    window.location.href = "../index.html";
   }
   //verificar si es un admin o no
 
