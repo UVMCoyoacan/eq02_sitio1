@@ -93,6 +93,7 @@ async function addPago(req, res) {
       if (admin.role === "admin") {
         var nuevoPagos = response[0].pagos;
         const miNuevoPago = { monto: abono, fecha: Date.now() };
+        nuevoPagos.reverse();
         nuevoPagos.push(miNuevoPago);
         nuevoPagos.reverse();
         response = await User.findOneAndUpdate(
@@ -113,6 +114,7 @@ async function addPago(req, res) {
             { new: true }
           );
           let adeudosAct = response.deudasSaldadas;
+          adeudosAct.reverse();
           adeudosAct.push(nuevoAdeudo);
           adeudosAct.reverse();
 
