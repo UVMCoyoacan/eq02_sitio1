@@ -5,6 +5,7 @@ const md_auth = require("../middlewares/autenticate");
 
 const md_upload = multiparty({ uploadDir: "./uploads/products" });
 const api = express.Router();
+const multipar = multiparty();
 
 api.get("/user/me", [md_auth.asureAuth], UserController.getMe);
 api.get("/users", [md_auth.asureAuth], UserController.getUsers);
@@ -28,5 +29,10 @@ api.delete(
   "/user/:id",
   [md_auth.asureAuth, md_upload],
   UserController.deleteUser
+);
+api.get(
+  "/user/getUser/",
+  [md_auth.asureAuth, md_upload, multipar],
+  UserController.getUser
 );
 module.exports = api;
