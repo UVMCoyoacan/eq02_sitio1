@@ -796,7 +796,6 @@ h3 {
 
     .contenedor-adeudo{
         border-bottom:#000;
-
         border-bottom-style: solid;
         display: grid;
         grid-template-columns: 1fr;

@@ -94,6 +94,56 @@ function verAdeudo(){
     function(response){
       const encabezados = ["Fecha", "Monto"];
       const contenedor = document.getElementById("User-cont");
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+      const encabezadosAdeudosPagados = ["Cantidad", "Fecha de liquidación"];
+      const tituloAdeudosPagados=document.createElement("h3");
+      tituloAdeudosPagados.innerHTML="ADEUDOS ANTERIORES";
+
+      const adeudosPagados=document.createElement("div");
+      adeudosPagados.className="contenedor-adeudo";
+      const contDatos=document.createElement("div");
+      contDatos.className="cont-adeudo2";
+      const contCantidad=document.createElement("div");
+      const contFechaLiq=document.createElement("div");
+      contCantidad.className="cont-deuda";
+      contFechaLiq.className="cont-porPagar";
+
+      let datosPetAdeudosPagados = [];
+
+      for(let i=0; i<response.data.deudasSaldadas.length;i++){
+        datosPetAdeudosPagados.push(response.data.deudasSaldadas[i]);
+        const fechaFormateada = new Date(datosPetAdeudosPagados[i].fecha);
+        const dia=fechaFormateada.getDate().toString().padStart(2, '0');
+        const mes=(fechaFormateada.getMonth() + 1).toString().padStart(2, '0');
+        const ye=fechaFormateada.getFullYear();
+        datosPetAdeudosPagados[i].fecha=`${dia}/${mes}/${ye}`;
+        datosPetAdeudosPagados[i].total=`$${datosPetAdeudosPagados[i].total} MXN`;
+      }
+
+      const enc11 = document.createElement("h4");
+      enc11.innerHTML = encabezadosAdeudosPagados[0];
+      const enc22 = document.createElement("h4");
+      enc22.innerHTML = encabezadosAdeudosPagados[1];
+      contCantidad.appendChild(enc11);
+      contFechaLiq.appendChild(enc22);
+
+      for(let j=0; j<datosPetAdeudosPagados.length;j++){
+        const dato = document.createElement("h5");
+        const dato2 = document.createElement("h5");
+        dato.innerHTML = datosPetAdeudosPagados[j].total;
+        dato2.innerHTML = datosPetAdeudosPagados[j].fecha;
+        contCantidad.appendChild(dato);
+        contFechaLiq.appendChild(dato2);
+      }
+    
+      contDatos.appendChild(contCantidad);
+      contDatos.appendChild(contFechaLiq);
+      adeudosPagados.appendChild(tituloAdeudosPagados);
+      adeudosPagados.appendChild(contDatos);
+      contenedor.appendChild(adeudosPagados);
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
       const p = document.createElement("h3");
       p.innerHTML = "PAGOS REALIZADOS";
       const contenedorHijo = document.createElement("div");
@@ -102,8 +152,7 @@ function verAdeudo(){
       contenedorAdeudo.className="contenedor-adeudo";
       const contenedorPago = document.createElement("div");
       contenedorPago.className="contenedor-pago";
-      var datosPet = [];
-      var pago=[];
+      let datosPet = [];
       console.log(response.data);
       for(let i=0; i<response.data.pagos.length;i++){
         datosPet.push(response.data.pagos[i]);
