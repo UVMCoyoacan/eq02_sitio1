@@ -120,6 +120,7 @@ async function addPago(req, res) {
             { new: true }
           );
         }
+        response = await User.findOne({ email: email }).sort({ pagos: "desc" });
         return res.status(200).send(response);
       }
       return res.status(400).send({
