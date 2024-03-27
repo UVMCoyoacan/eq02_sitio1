@@ -281,17 +281,145 @@ function agregarProducto() {
 function registrarDeuda() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar deuda";
   const contenedor = document.getElementById("admin-cont");
-  const p = document.createElement("p");
-  p.innerHTML = "Este es el contenido de registrar deuda";
-  contenedor.appendChild(p);
+  const formulario=formularioFinanzas("Monto de deuda");
+  contenedor.appendChild(formulario);
+  formulario.addEventListener("submit",function(event){
+    event.preventDefault();
+    
+    const url=api.getUrl();
+    const token=localStorage.getItem("token");
+    const headers={
+      Authorization:`Bearer ${token}`
+    }
+
+    const correo=document.getElementById("email").value;
+    const deuda=document.getElementById("dinero").value;
+
+    const datos=new FormData();
+    datos.append("email",correo);
+    datos.append("deuda",deuda);
+
+    axios.post(url+"/user/setDeuda",datos,{headers}).then(
+      function(response){
+          const contMensaje=document.createElement("div");
+          contMensaje.className="addProductResp";
+          const mensaje=document.createElement("h2");
+          mensaje.innerHTML="Deuda a "+correo+" por $"+deuda+"MXN ha sido registrada exitosamente";
+          contMensaje.appendChild(mensaje);
+          contenedor.appendChild(contMensaje);
+          formulario.reset();
+      }
+    ).catch(
+      function(error){
+        const contMensaje=document.createElement("div");
+          contMensaje.className="addProductResp";
+          const mensaje=document.createElement("h2");
+          mensaje.innerHTML="Deuda no registrada. Revise los campos";
+          contMensaje.appendChild("mensaje");
+          contenedor.appendChild(contMensaje);
+          formulario.reset();
+      }
+    );
+
+  });
 }
+
+function formularioFinanzas(nombre){
+  const contPapa=document.createElement("div");
+  const formulario=document.createElement("form");
+  formulario.id="formulario";
+  const cajaCorreo=document.createElement("input");
+  cajaCorreo.type="email";
+  cajaCorreo.id="email";
+  cajaCorreo.name="email";
+  cajaCorreo.required=true;
+  cajaCorreo.placeholder="Correo electrónico";
+  cajaCorreo.className="form-elem";
+
+  const cajaDinero=document.createElement("input");
+  cajaDinero.type="number";
+  cajaDinero.id="dinero";
+  cajaDinero.name="dinero";
+  cajaDinero.required=true;
+  cajaDinero.placeholder=nombre;
+  cajaDinero.className="form-elem";
+  cajaDinero.min=0;
+
+  const boton=document.createElement("input");
+  boton.type="submit";
+  boton.value="Registrar";
+  boton.className="btn-principal";
+  boton.id="btn-registrar";
+
+  formulario.appendChild(cajaCorreo);
+  formulario.appendChild(cajaDinero);
+  formulario.appendChild(boton);
+  contPapa.appendChild(formulario);
+
+  return contPapa;
+}
+
 function registrarPago() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar pago";
   const contenedor = document.getElementById("admin-cont");
-  const p = document.createElement("p");
-  p.innerHTML = "Este es el contenido de registrar pago";
-  contenedor.appendChild(p);
+  const formulario=formularioFinanzas("Monto de pago");
+  contenedor.appendChild(formulario);
+  formulario.addEventListener("submit",function(event){
+    event.preventDefault();
+    
+    const url=api.getUrl();
+    const token=localStorage.getItem("token");
+    const headers={
+      Authorization:`Bearer ${token}`
+    }
+
+    const correo=document.getElementById("email").value;
+    const deuda=document.getElementById("dinero").value;
+
+    const datos=new FormData();
+    datos.append("email",correo);
+    datos.append("abono",deuda);
+
+    axios.post(url+"/user/addPago/",datos,{headers}).then(
+      function(response){
+          const contMensaje=document.createElement("div");
+          contMensaje.className="addProductResp";
+          const mensaje=document.createElement("h2");
+          const headers2={
+            Authorization:`Bearer ${token}`,
+            "Content-Type":"application/json"
+          };
+          axios.get(url+"/user/getUser/",{headers2},{data:{email:correo,active:true}}).then(
+            function(response){
+              mensaje.innerHTML="Pago de "+correo+" por $"+deuda+"MXN ha sido registrada exitosamente. ";
+              mensaje.innerHTML+="Deuda restante: "+response.data.porPagar;
+            }
+          ).catch(
+            function(error){
+              console.log(error);
+            }
+          )
+
+          contMensaje.appendChild(mensaje);
+          contenedor.appendChild(contMensaje);
+          formulario.reset();
+      }
+    ).catch(
+      function(error){
+        const contMensaje=document.createElement("div");
+          contMensaje.className="addProductResp";
+          const mensaje=document.createElement("h2");
+          mensaje.innerHTML="Pago no registrado. Revise los campos";
+          contMensaje.appendChild(mensaje);
+          contenedor.appendChild(contMensaje);
+          
+      }
+    );
+    
+  });
 }
+
+
 function buscarCliente() {
   document.getElementsByTagName("title")[0].innerHTML = "Buscar cliente";
   const contenedor = document.getElementById("admin-cont");
