@@ -17,5 +17,11 @@ const UserSchema = mongoose.Schema({
   ],
   deuda: Number,
   porPagar: Number,
+  deudasSaldadas: [
+    {
+      fecha: Date,
+      total: Number,
+    },
+  ],
 });
 module.exports = mongoose.model("User", UserSchema);

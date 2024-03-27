@@ -104,6 +104,22 @@ async function addPago(req, res) {
           { porPagar: response.porPagar - abono },
           { new: true }
         );
+        if (response.porPagar === 0) {
+          const nuevoAdeudo = { fecha: Date.now(), total: response.deuda };
+          response = await User.findOneAndUpdate(
+            { email: email },
+            { deuda: 0 },
+            { new: true }
+          );
+          let adeudosAct = response.deudasSaldadas;
+          adeudosAct.push(nuevoAdeudo);
+
+          response = await User.findOneAndUpdate(
+            { email: email },
+            { deudasSaldadas: adeudosAct },
+            { new: true }
+          );
+        }
         return res.status(200).send(response);
       }
       return res.status(400).send({
