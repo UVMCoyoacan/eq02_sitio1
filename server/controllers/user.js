@@ -94,6 +94,7 @@ async function addPago(req, res) {
         var nuevoPagos = response[0].pagos;
         const miNuevoPago = { monto: abono, fecha: Date.now() };
         nuevoPagos.push(miNuevoPago);
+        nuevosPagos.reverse();
         response = await User.findOneAndUpdate(
           { email: email },
           { pagos: nuevoPagos },
@@ -113,6 +114,7 @@ async function addPago(req, res) {
           );
           let adeudosAct = response.deudasSaldadas;
           adeudosAct.push(nuevoAdeudo);
+          adeudosAct.reverse();
 
           response = await User.findOneAndUpdate(
             { email: email },
