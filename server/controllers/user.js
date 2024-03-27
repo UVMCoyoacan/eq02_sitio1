@@ -170,6 +170,17 @@ async function deleteUser(req, res) {
     res.status(400).send({ msg: "Error al eliminar al usuario" });
   }
 }
+async function getUser(req, res) {
+  const { active, email } = req.body;
+  console.log(req.body);
+  let response = null;
+  if (active === undefined) {
+    response = await User.find();
+  } else {
+    response = await User.findOne({ email });
+  }
+  res.status(200).send(response);
+}
 
 module.exports = {
   getMe,
@@ -179,4 +190,5 @@ module.exports = {
   addPago,
   updateUser,
   deleteUser,
+  getUser,
 };
