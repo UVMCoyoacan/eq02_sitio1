@@ -1,16 +1,22 @@
+const { json } = require("body-parser");
 const Product = require("../models/product");
 const image = require("../utils/image");
 
 async function getProducts(req, res) {
-  const { active, ordenar, filtro } = req.query;
-  console.log(req.query);
+  const { active, ordenarPor, filtro } = req.body.params;
+  //console.log(req.body.params);
   let response = null;
-  if (!req.query) {
+  if (!req.body) {
     response = await Product.find();
-  } else if (active) {
+  } else {
     //response = await Product.find({ active });
-
-    response = await Product.find({ active });
+    if (filtro === "Todos") {
+      response = await Product.find({ active }).sort(ordenarPor);
+    } else {
+      response = await Product.find({ active, categoria: filtro }).sort(
+        ordenarPor
+      );
+    }
   }
   res.status(200).send(response);
 }

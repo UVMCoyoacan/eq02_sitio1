@@ -402,7 +402,8 @@ function registrarPago() {
               " por $" +
               deuda +
               "MXN ha sido registrada exitosamente. ";
-            mensaje.innerHTML += "Deuda restante: " + response.data.porPagar;
+            mensaje.innerHTML +=
+              "Deuda restante: $" + response.data.porPagar + "MXN";
           })
           .catch(function (error) {
             console.log(error);

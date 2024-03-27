@@ -48,19 +48,20 @@ function cargarTienda() {
   xhr.send();
 }
 function cargarTiendaApi(ordenar, filtro) {
-  //const ordenarPor = obtenerFiltros(ordenar);
+  const ordenarPor = obtenerFiltros(Number(ordenar));
   const url = api.getUrl();
   const urlImg = api.getUrlImg();
   const params = {
     active: true,
-    ordenar: ordenar,
+    ordenarPor,
     filtro: filtro,
   };
   axios
-    .get(url + "/products/", { params: params })
+    .post(url + "/products/", { params })
     .then(function (response) {
       const productos = response.data;
       const contenedor = document.getElementById("tnd");
+      vaciarDiv(contenedor);
       for (let i = 0; i < productos.length; i++) {
         const item = document.createElement("div");
         item.className = "Tienda-item";
@@ -185,7 +186,7 @@ function cargarFiltros() {
   cont2.appendChild(listaOrd);
   contenedor.appendChild(cont2);
   listaOrd.addEventListener("change", function () {
-    cargarTiendaApi(listaOrd.sele, listaCat.value);
+    cargarTiendaApi(listaOrd.value, listaCat.value);
   });
   listaCat.addEventListener("change", function () {
     cargarTiendaApi(listaOrd.value, listaCat.value);
@@ -223,17 +224,23 @@ function obtenerFiltros(ordenar) {
   let respuesta;
   switch (ordenar) {
     case 0:
-      respuesta = { fecha: "desc" };
+      respuesta = { fecha: -1 };
       break;
     case 1:
-      respuesta = { fecha: "asc" };
+      respuesta = { fecha: 1 };
       break;
     case 2:
-      respuesta = { precio: "asc" };
+      respuesta = { precio: 1 };
       break;
     case 3:
-      respuesta = { precio: "desc" };
+      respuesta = { precio: -1 };
+      break;
+    default:
+      respuesta = { fecha: -1 };
       break;
   }
   return respuesta;
+}
+function vaciarDiv(contenedor) {
+  contenedor.innerHTML = "";
 }

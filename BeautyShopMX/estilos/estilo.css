@@ -792,6 +792,7 @@ h3 {
         justify-content: center;
         align-items: center;
         text-align: center;
+        
     }
 
     .contenedor-adeudo{
@@ -801,6 +802,7 @@ h3 {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         text-align: center;
+        margin-top: 5vh;
     }
 
     .cont-adeudo2{
@@ -816,5 +818,6 @@ h3 {
         margin-top: 5vh;
         text-align: center;
     }
+
 
 }
