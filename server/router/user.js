@@ -30,7 +30,7 @@ api.delete(
   [md_auth.asureAuth, md_upload],
   UserController.deleteUser
 );
-api.get(
+api.post(
   "/user/getUser/",
   [md_auth.asureAuth, md_upload, multipar],
   UserController.getUser

@@ -171,8 +171,7 @@ async function deleteUser(req, res) {
   }
 }
 async function getUser(req, res) {
-  const { active, email } = req.body;
-  console.log(req.body);
+  const { email, active } = req.body;
   let response = null;
   if (active === undefined) {
     response = await User.find();
