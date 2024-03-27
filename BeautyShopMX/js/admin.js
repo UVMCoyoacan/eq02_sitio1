@@ -9,7 +9,7 @@ function cerrarSesion() {
 document.addEventListener("DOMContentLoaded", function () {
   //verificar si se tiene una sesion iniciada
   if (!verificarSesion()) {
-    window.location.href = "../index.html";
+    //window.location.href = "../index.html";
   }
   //verificar si es un admin o no
 
@@ -122,11 +122,9 @@ async function misDatos() {
     Authorization: `Bearer ${token}`,
   };
 
-  const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico", "Rol"];
+  const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico"];
   datos.toString;
   const contenedor = document.getElementById("admin-cont");
-  const p = document.createElement("p");
-  p.innerHTML = "Este es el contenido de mis datos";
   const contenedorHijo = document.createElement("div");
 
   axios
@@ -136,11 +134,10 @@ async function misDatos() {
       datosPet.push(response.data.firstname);
       datosPet.push(response.data.lastname);
       datosPet.push(response.data.email);
-      datosPet.push(response.data.role);
       for (let i = 0; i < encabezados.length; i++) {
-        const enc = document.createElement("h4");
+        const enc = document.createElement("h5");
         enc.innerHTML = encabezados[i];
-        const dato = document.createElement("h5");
+        const dato = document.createElement("h6");
         dato.innerHTML = datosPet[i];
         contenedorHijo.appendChild(enc);
         contenedorHijo.appendChild(document.createElement("br"));

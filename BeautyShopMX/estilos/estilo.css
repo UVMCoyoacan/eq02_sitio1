@@ -543,6 +543,10 @@ h3 {
 .btn-principal-selected {
     background-color: var(--btnPrincipalHover);
 }
+.btn-principal:disabled, .btn-principal:disabled:hover{
+    opacity: 0.6;
+}
+
 
 .Submenu-lista {
     list-style: none;
