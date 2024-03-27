@@ -94,7 +94,7 @@ async function addPago(req, res) {
         var nuevoPagos = response[0].pagos;
         const miNuevoPago = { monto: abono, fecha: Date.now() };
         nuevoPagos.push(miNuevoPago);
-        nuevosPagos.reverse();
+        nuevoPagos.reverse();
         response = await User.findOneAndUpdate(
           { email: email },
           { pagos: nuevoPagos },
