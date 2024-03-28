@@ -103,34 +103,7 @@ function misDatos() {
   axios
     .get(url + "/user/me/", { headers })
     .then(function (response) {
-      const encabezados = [
-        "Nombre(s)",
-        "Apellido(s)",
-        "Correo electrónico",
-        "Rol",
-      ];
-      const contenedor = document.getElementById("User-cont");
-      const p = document.createElement("p");
-      p.innerHTML = "Este es el contenido de mis datos";
-      const contenedorHijo = document.createElement("div");
-
-      var datosPet = [];
-      datosPet.push(response.data.firstname);
-      datosPet.push(response.data.lastname);
-      datosPet.push(response.data.email);
-      datosPet.push(response.data.role);
-      for (let i = 0; i < encabezados.length; i++) {
-        const enc = document.createElement("h4");
-        enc.innerHTML = encabezados[i];
-        const dato = document.createElement("h5");
-        dato.innerHTML = datosPet[i];
-        contenedorHijo.appendChild(enc);
-        contenedorHijo.appendChild(document.createElement("br"));
-        contenedorHijo.appendChild(dato);
-        contenedorHijo.appendChild(document.createElement("br"));
-        contenedor.appendChild(p);
-        contenedor.appendChild(contenedorHijo);
-      }
+      modulo.getMisDatos(response);
     })
     .catch(function (error) {
       console.log(error);
