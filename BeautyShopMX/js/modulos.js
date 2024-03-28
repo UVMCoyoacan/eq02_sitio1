@@ -102,6 +102,7 @@ function aparecerCambioContra(){
     const contraViejita=document.getElementById("contraActual").value;
     const contraNueva=document.getElementById("contraNueva1").value;
     const multi=new FormData();
+    console.log("Lo que quieras");
     multi.append("password",contraViejita);
     multi.append("newPassword",contraNueva);
 
@@ -114,10 +115,11 @@ function aparecerCambioContra(){
     axios.post(url + "/user/updatePassword/",multi,{ headers }).then(
       function(response){
         console.log(response);
+        console.log("Hola");
       }
     ).catch(
       function(error){
-
+        console.log(error);
       }
     );
   });
