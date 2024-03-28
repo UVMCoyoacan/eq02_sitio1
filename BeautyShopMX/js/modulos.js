@@ -41,7 +41,10 @@ function createMisDatos(response) {
   botonMod.name = "boton";
   botonMod.id = "boton";
   botonMod.className = "btn-principal";
-  botonMod.onclick = () => contenedorAzul.appendChild(aparecerCambioContra());
+  botonMod.onclick = function () {
+    contenedorAzul.innerHTML = "";
+    contenedorAzul.appendChild(aparecerCambioContra());
+  };
   contenedorNaranja.appendChild(botonMod);
 }
 
@@ -112,16 +115,15 @@ function aparecerCambioContra() {
     };
     const contenedor = document.getElementById("User-cont");
     const msg = document.createElement("h5");
+    contenedor.appendChild(msg);
     axios
       .post(url + "/user/updatePassword/", multi, { headers })
       .then(function (response) {
         msg.innerHTML = response.data.msg;
-        contenedor.appendChild(msg);
       })
       .catch(function (error) {
         console.log(error);
         msg.innerHTML = error.response.data.msg;
-        contenedor.appendChild(msg);
       });
   });
 
@@ -130,7 +132,18 @@ function aparecerCambioContra() {
 
 function createMisPagos(response) {
   const encabezados = ["Fecha", "Monto"];
-  const contenedor = document.getElementById("User-cont");
+  const contenedorPrincipal = document.getElementById("User-cont");
+  let contenedor;
+  console.log(contenedorPrincipal);
+  if (document.getElementById("contenedorDeMisPagos") != undefined) {
+    contenedor = document.getElementById("contenedorDeMisPagos");
+  } else {
+    contenedor = document.createElement("div");
+  }
+  contenedorPrincipal.appendChild(contenedor);
+  contenedorPrincipal.appendChild(contenedor);
+  contenedor.innerHTML = "";
+  contenedor.id = "contenedorDeMisPagos";
 
   /*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
   const encabezadosAdeudosPagados = ["Cantidad", "Fecha de liquidación"];
@@ -138,6 +151,7 @@ function createMisPagos(response) {
   tituloAdeudosPagados.innerHTML = "ADEUDOS ANTERIORES";
 
   const adeudosPagados = document.createElement("div");
+
   adeudosPagados.className = "contenedor-adeudo";
   const contDatos = document.createElement("div");
   contDatos.className = "cont-adeudo2";

@@ -428,33 +428,26 @@ function buscarCliente() {
   form.appendChild(cajaBuscar);
   form.appendChild(btnBuscar);
   contenedor.appendChild(form);
-  form
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      const usuario = document.getElementById("buscar").value;
-      const multipart = new FormData();
-      multipart.append("email", usuario);
-      multipart.append("active", true);
-      axios
-        .post(url + "/user/getUser/", multipart, { headers })
-        .then(function (response) {
-          const titulo = document.createElement("h4");
-          titulo.innerHTML = `Finanzas de ${response.data.firstname} ${response.data.lastname}:`;
-          contenedor.appendChild(titulo);
-          modulo.getMisPagos(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-          const titulo = document.createElement("h4");
-          titulo.innerHTML = `El correo ${usuario} no se ha encontrado:`;
-          contenedor.appendChild(titulo);
-          modulo.getMisPagos(response);
-        });
-    })
-    .catch(function (error) {
-      console.log(error);
-      const titulo = document.createElement("h4");
-      titulo.innerHTML = `El usuario ${usuario} no ha sido encontrado`;
-      contenedor.appendChild(titulo);
-    });
+  const titulo = document.createElement("h3");
+  contenedor.appendChild(titulo);
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const usuario = document.getElementById("buscar").value;
+    const multipart = new FormData();
+    multipart.append("email", usuario);
+    multipart.append("active", true);
+
+    axios
+      .post(url + "/user/getUser/", multipart, { headers })
+      .then(function (response) {
+        titulo.innerHTML = `Finanzas de ${response.data.firstname} ${response.data.lastname}:`;
+        modulo.getMisPagos(response);
+      })
+      .catch(function (error) {
+        titulo.innerHTML = `El correo ${usuario} no se ha encontrado:`;
+        if (document.getElementById("contenedorDeMisPagos") != undefined) {
+          document.getElementById("contenedorDeMisPagos").innerHTML = "";
+        }
+      });
+  });
 }
