@@ -93,7 +93,7 @@ function vaciarDiv(contenedor) {
   contenedor.innerHTML = "";
 }
 function clickMenu(ind, botones) {
-  vaciarDiv(document.getElementById("admin-cont"));
+  vaciarDiv(document.getElementById("User-cont"));
   btnSelec = ind;
   for (let i = 0; i < botones.length; i++) {
     botones[i].className = "btn-principal";
@@ -124,7 +124,7 @@ async function misDatos() {
 
   const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico"];
   datos.toString;
-  const contenedor = document.getElementById("admin-cont");
+  const contenedor = document.getElementById("User-cont");
   const contenedorHijo = document.createElement("div");
 
   axios
@@ -153,7 +153,7 @@ async function misDatos() {
 }
 function agregarProducto() {
   document.getElementsByTagName("title")[0].innerHTML = "Agregar producto";
-  const contenedor = document.getElementById("admin-cont");
+  const contenedor = document.getElementById("User-cont");
   const p = document.createElement("h3");
   p.innerHTML = "Agregar un producto:";
   p.className = "addProductEnc";
@@ -276,7 +276,7 @@ function agregarProducto() {
 }
 function registrarDeuda() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar deuda";
-  const contenedor = document.getElementById("admin-cont");
+  const contenedor = document.getElementById("User-cont");
   const formulario = formularioFinanzas("Monto de deuda");
   contenedor.appendChild(formulario);
   formulario.addEventListener("submit", function (event) {
@@ -347,7 +347,7 @@ function formularioFinanzas(nombre) {
   boton.type = "submit";
   boton.value = "Registrar";
   boton.className = "btn-principal";
-  boton.id = "btn-registrar";
+  boton.id = "btn-principal";
 
   formulario.appendChild(cajaCorreo);
   formulario.appendChild(cajaDinero);
@@ -359,7 +359,7 @@ function formularioFinanzas(nombre) {
 
 function registrarPago() {
   document.getElementsByTagName("title")[0].innerHTML = "Registrar pago";
-  const contenedor = document.getElementById("admin-cont");
+  const contenedor = document.getElementById("User-cont");
   const formulario = formularioFinanzas("Monto de pago");
   contenedor.appendChild(formulario);
   formulario.addEventListener("submit", function (event) {
@@ -423,8 +423,56 @@ function registrarPago() {
 
 function buscarCliente() {
   document.getElementsByTagName("title")[0].innerHTML = "Buscar cliente";
-  const contenedor = document.getElementById("admin-cont");
+  const contenedor = document.getElementById("User-cont");
   const p = document.createElement("p");
   p.innerHTML = "Este es el contenido de buscar cliente";
   contenedor.appendChild(p);
+  const url = api.getUrl();
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const form = document.createElement("form");
+  const cajaBuscar = document.createElement("input");
+  cajaBuscar.id = "buscar";
+  cajaBuscar.name = "buscar";
+  cajaBuscar.placeholder = "Buscar por correo electrónico";
+  cajaBuscar.type = "email";
+  cajaBuscar.required = true;
+  cajaBuscar.className = "form-elem";
+  const btnBuscar = document.createElement("input");
+  btnBuscar.id = "btnBuscar";
+  btnBuscar.name = "btnBuscar";
+  btnBuscar.value = "Buscar";
+  btnBuscar.type = "submit";
+  btnBuscar.className = "btn-principal";
+
+  form.appendChild(cajaBuscar);
+  form.appendChild(btnBuscar);
+  contenedor.appendChild(form);
+  form
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      const usuario = document.getElementById("buscar").value;
+      const multipart = new FormData();
+      multipart.append("email", usuario);
+      multipart.append("active", true);
+      axios
+        .post(url + "/user/getUser/", multipart, { headers })
+        .then(function (response) {
+          const titulo = document.createElement("h4");
+          titulo.innerHTML = `Finanzas de ${response.data.firstname} ${response.data.lastname}:`;
+          contenedor.appendChild(titulo);
+          modulo.getMisPagos(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    })
+    .catch(function (error) {
+      console.log(error);
+      const titulo = document.createElement("h4");
+      titulo.innerHTML = `El usuario ${usuario} no ha sido encontrado`;
+      contenedor.appendChild(titulo);
+    });
 }

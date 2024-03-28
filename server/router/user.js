@@ -35,4 +35,9 @@ api.post(
   [md_auth.asureAuth, md_upload, multipar],
   UserController.getUser
 );
+api.post(
+  "/user/updatePassword/",
+  [md_auth.asureAuth, md_upload, multipar],
+  UserController.updtatePassword
+);
 module.exports = api;
