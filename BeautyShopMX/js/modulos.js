@@ -4,30 +4,26 @@ const modulo = (function () {
     getMisPagos: function (response) {
       return createMisPagos(response);
     },
-    getMisDatos: function(response){
+    getMisDatos: function (response) {
       return createMisDatos(response);
-    }
+    },
   };
 })();
 
-function createMisDatos(response){
-  const encabezados = [
-    "Nombre(s)",
-    "Apellido(s)",
-    "Correo electrónico"
-  ];
+function createMisDatos(response) {
+  const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico"];
 
   const contenedor = document.getElementById("User-cont");
   const contenedorNaranja = document.createElement("div");
   const contenedorRojo = document.createElement("div");
   const contenedorAzul = document.createElement("div");
-  const botonMod=document.createElement("input");
+  const botonMod = document.createElement("input");
   var datosPet = [];
   datosPet.push(response.data.firstname);
   datosPet.push(response.data.lastname);
   datosPet.push(response.data.email);
 
-  for (let i = 0; i < encabezados.length; i++){
+  for (let i = 0; i < encabezados.length; i++) {
     const enc = document.createElement("h4");
     enc.innerHTML = encabezados[i];
     const dato = document.createElement("h5");
@@ -40,46 +36,49 @@ function createMisDatos(response){
   contenedor.appendChild(contenedorNaranja);
   contenedor.appendChild(contenedorAzul);
 
-  botonMod.type="button";
-  botonMod.value="Modificar contraseña";
-  botonMod.name="boton";
-  botonMod.id="boton";
-  botonMod.className="btn-principal";
+  botonMod.type = "button";
+  botonMod.value = "Modificar contraseña";
+  botonMod.name = "boton";
+  botonMod.id = "boton";
+  botonMod.className = "btn-principal";
   botonMod.onclick = () => contenedorAzul.appendChild(aparecerCambioContra());
   contenedorNaranja.appendChild(botonMod);
 }
 
-function aparecerCambioContra(){
-  const formulario=document.createElement("form");
-  const contraActual=document.createElement("input");
-  const contraNueva=document.createElement("input");
-  const contraNueva2=document.createElement("input");
-  const botonCambio=document.createElement("input");
-  
-  contraActual.id="contraActual";
-  contraActual.name="contraActual";
-  contraActual.type="password";
-  contraActual.className="form-elem";
-  contraActual.placeholder="Contraseña actual";
+function aparecerCambioContra() {
+  const formulario = document.createElement("form");
+  const contraActual = document.createElement("input");
+  const contraNueva = document.createElement("input");
+  const contraNueva2 = document.createElement("input");
+  const botonCambio = document.createElement("input");
+
+  contraActual.id = "contraActual";
+  contraActual.name = "contraActual";
+  contraActual.type = "password";
+  contraActual.className = "form-elem";
+  contraActual.placeholder = "Contraseña actual";
   formulario.appendChild(contraActual);
   formulario.appendChild(document.createElement("br"));
 
-  contraNueva.id="contraNueva1";
-  contraNueva.name="contraNueva";
-  contraNueva.type="password";
-  contraNueva.className="form-elem";
-  contraNueva.placeholder="Contraseña nueva";
+  contraNueva.id = "contraNueva1";
+  contraNueva.name = "contraNueva";
+  contraNueva.type = "password";
+  contraNueva.className = "form-elem";
+  contraNueva.placeholder = "Contraseña nueva";
   formulario.appendChild(contraNueva);
   formulario.appendChild(document.createElement("br"));
 
-  contraNueva2.id="contraNueva2";
-  contraNueva2.name="contraNueva";
-  contraNueva2.type="password";
-  contraNueva2.className="form-elem";
-  contraNueva2.placeholder="Repetir Contraseña nueva";
+  contraNueva2.id = "contraNueva2";
+  contraNueva2.name = "contraNueva";
+  contraNueva2.type = "password";
+  contraNueva2.className = "form-elem";
+  contraNueva2.placeholder = "Repetir Contraseña nueva";
 
   contraNueva2.addEventListener("input", function () {
-    if (document.getElementById("contraNueva1").value != document.getElementById("contraNueva2").value) {
+    if (
+      document.getElementById("contraNueva1").value !=
+      document.getElementById("contraNueva2").value
+    ) {
       contraNueva2.className = "form-elem contError";
       botonCambio.disabled = true;
     } else {
@@ -90,38 +89,40 @@ function aparecerCambioContra(){
   formulario.appendChild(contraNueva2);
   formulario.appendChild(document.createElement("br"));
 
-  botonCambio.type="submit";
-  botonCambio.name="boton";
-  botonCambio.id="boton";
-  botonCambio.className="btn-principal";
-  botonCambio.value="Cambiar contraseña";
+  botonCambio.type = "submit";
+  botonCambio.name = "boton";
+  botonCambio.id = "boton";
+  botonCambio.className = "btn-principal";
+  botonCambio.value = "Cambiar contraseña";
   formulario.appendChild(botonCambio);
   formulario.appendChild(document.createElement("br"));
 
-  formulario.addEventListener("submit",function(){
-    const contraViejita=document.getElementById("contraActual").value;
-    const contraNueva=document.getElementById("contraNueva1").value;
-    const multi=new FormData();
-    console.log("Lo que quieras");
-    multi.append("password",contraViejita);
-    multi.append("newPassword",contraNueva);
+  formulario.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const contraViejita = document.getElementById("contraActual").value;
+    const contraNueva = document.getElementById("contraNueva1").value;
+    const multi = new FormData();
+    multi.append("password", contraViejita);
+    multi.append("newPassword", contraNueva);
 
     const url = api.getUrl();
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-
-    axios.post(url + "/user/updatePassword/",multi,{ headers }).then(
-      function(response){
-        console.log(response);
-        console.log("Hola");
-      }
-    ).catch(
-      function(error){
+    const contenedor = document.getElementById("User-cont");
+    const msg = document.createElement("h5");
+    axios
+      .post(url + "/user/updatePassword/", multi, { headers })
+      .then(function (response) {
+        msg.innerHTML = response.data.msg;
+        contenedor.appendChild(msg);
+      })
+      .catch(function (error) {
         console.log(error);
-      }
-    );
+        msg.innerHTML = error.response.data.msg;
+        contenedor.appendChild(msg);
+      });
   });
 
   return formulario;

@@ -192,6 +192,7 @@ async function updtatePassword(req, res) {
   bcrypt.compare(password, usuario.password, async function (err, result) {
     if (err) {
       console.error("Error al comparar contraseñas:", err);
+      res.status(400).send({ msg: "error al comparar contraseñas" });
     } else {
       if (result) {
         const hashPassword = bcrypt.hashSync(newPassword, salt);

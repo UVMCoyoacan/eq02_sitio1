@@ -467,6 +467,10 @@ function buscarCliente() {
         })
         .catch(function (error) {
           console.log(error);
+          const titulo = document.createElement("h4");
+          titulo.innerHTML = `El correo ${usuario} no se ha encontrado:`;
+          contenedor.appendChild(titulo);
+          modulo.getMisPagos(response);
         });
     })
     .catch(function (error) {

@@ -41,7 +41,6 @@ async function login(req, res) {
     const emailLowerCase = email.toLowerCase();
 
     const userStore = await User.findOne({ email: emailLowerCase });
-    console.log(userStore);
 
     if (!userStore) {
       return res.status(500).send({ msg: "Error del servidor 1" });
