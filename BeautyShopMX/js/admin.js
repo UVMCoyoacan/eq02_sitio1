@@ -114,42 +114,20 @@ function clickMenu(ind, botones) {
   }
 }
 async function misDatos() {
-  document.getElementsByTagName("title")[0].innerHTML = "Mis datos";
-  var datos = [];
-
+  const url = api.getUrl();
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  const encabezados = ["Nombre(s)", "Apellido(s)", "Correo electrónico"];
-  datos.toString;
-  const contenedor = document.getElementById("User-cont");
-  const contenedorHijo = document.createElement("div");
-
   axios
     .get(url + "/user/me/", { headers })
     .then(function (response) {
-      var datosPet = [];
-      datosPet.push(response.data.firstname);
-      datosPet.push(response.data.lastname);
-      datosPet.push(response.data.email);
-      for (let i = 0; i < encabezados.length; i++) {
-        const enc = document.createElement("h5");
-        enc.innerHTML = encabezados[i];
-        const dato = document.createElement("h6");
-        dato.innerHTML = datosPet[i];
-        contenedorHijo.appendChild(enc);
-        contenedorHijo.appendChild(document.createElement("br"));
-        contenedorHijo.appendChild(dato);
-        contenedorHijo.appendChild(document.createElement("br"));
-      }
+      modulo.getMisDatos(response);
     })
     .catch(function (error) {
       console.log(error);
     });
-
-  contenedor.appendChild(contenedorHijo);
 }
 function agregarProducto() {
   document.getElementsByTagName("title")[0].innerHTML = "Agregar producto";
