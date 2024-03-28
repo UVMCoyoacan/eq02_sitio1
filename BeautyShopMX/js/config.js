@@ -2,8 +2,8 @@
 const api = (function () {
   // Variables privadas
   //let url = "http://localhost:3977/api/v1";
-  let url = "http://localhost:3977/api/v1";
-  let urlIMG = "http://localhost:3977/";
+  let url = "http://192.168.1.172:3977/api/v1";
+  let urlIMG = "http://192.168.1.172:3977/";
   const categorias = [
     "Todos",
     "Ropa",
@@ -27,11 +27,11 @@ const api = (function () {
     getUrlImg: function () {
       return urlIMG;
     },
-    getCategorias:function(){
+    getCategorias: function () {
       return categorias;
     },
-    getOrdenarPor:function(){
+    getOrdenarPor: function () {
       return ordenarPor;
-    }
+    },
   };
 })();

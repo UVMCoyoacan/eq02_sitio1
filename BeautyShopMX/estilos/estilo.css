@@ -564,6 +564,39 @@ h3 {
 .contError{
     background-color:crimson;
 }
+.contenedor-pago{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.contenedor-adeudo{
+    border-bottom:#000;
+    border-bottom-style: solid;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.cont-adeudo2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.contenedor-hijo{
+    margin-top: 5vh;
+    text-align: center;
+}
 
 @media (min-width:900px) {
     .nav {
