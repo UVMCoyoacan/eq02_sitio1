@@ -2,7 +2,7 @@
 const api = (function () {
   // Variables privadas
   //let url = "http://localhost:3977/api/v1";
-  let url = "http://servergutierrez.ddns.net/:3977/api/v1";
+  let url = "http://servergutierrez.ddns.net:3977/api/v1";
   let urlIMG = "http://servergutierrez.ddns.net/";
   const categorias = [
     "Todos",
