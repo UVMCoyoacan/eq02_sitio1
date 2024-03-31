@@ -62,6 +62,7 @@ function insertarMenu() {
   const btnTitulos = [
     "Mis datos",
     "Agregar producto",
+    "Editar tienda",
     "Registrar deuda",
     "Registrar pago",
     "Buscar cliente",
@@ -103,13 +104,17 @@ function clickMenu(ind, botones) {
     misDatos();
   } else if (btnSelec === 1) {
     agregarProducto();
-  } else if (btnSelec === 2) {
+  }
+  else if (btnSelec === 2) {
+    editarTienda();
+  }
+  else if (btnSelec === 3) {
     registrarDeuda();
-  } else if (btnSelec === 3) {
-    registrarPago();
   } else if (btnSelec === 4) {
-    buscarCliente();
+    registrarPago();
   } else if (btnSelec === 5) {
+    buscarCliente();
+  } else if (btnSelec === 6) {
     cerrarSesion();
   }
 }
@@ -136,72 +141,7 @@ function agregarProducto() {
   p.innerHTML = "Agregar un producto:";
   p.className = "addProductEnc";
   contenedor.appendChild(p);
-  const contenedorPadre = document.createElement("div");
-  contenedorPadre.className = "contAddProduct";
-  contenedor.appendChild(contenedorPadre);
-  //formulario
-
-  const contenedorHijo = document.createElement("div");
-  contenedorHijo.className = "contAddProductForm";
-  const formulario = document.createElement("form");
-  formulario.id = "formulario";
-  contenedorHijo.appendChild(formulario);
-  contenedorPadre.appendChild(contenedorHijo);
-
-  //Titulo producto
-  const formTitulo = document.createElement("input");
-  formTitulo.type = "text";
-  formTitulo.id = "titulo";
-  formTitulo.name = "titulo";
-  formTitulo.className = "form-elem";
-  formTitulo.required = true;
-  formTitulo.placeholder = "Titulo del prodcuto";
-  formulario.appendChild(formTitulo);
-  formulario.appendChild(document.createElement("br"));
-  //precio producto
-  const formPrecio = document.createElement("input");
-  formPrecio.type = "number";
-  formPrecio.id = "precio";
-  formPrecio.name = "precio";
-  formPrecio.className = "form-elem";
-  formPrecio.required = true;
-  formPrecio.placeholder = "Precio del prodcuto";
-  formPrecio.min = 0;
-  formulario.appendChild(formPrecio);
-  formulario.appendChild(document.createElement("br"));
-  //Imagen producto
-  const formImagen = document.createElement("input");
-  formImagen.type = "file";
-  formImagen.id = "imagenProd";
-  formImagen.name = "imagenProd";
-  formImagen.className = "form-elem";
-  formImagen.required = true;
-  formImagen.placeholder = "Imagen del prodcuto";
-  formImagen.accept = "image/*";
-  formImagen.multiple = true;
-  formulario.appendChild(formImagen);
-  formulario.appendChild(document.createElement("br"));
-  //Categoria
-  nombresCategorias = api.getCategorias();
-  const listaCategoria = document.createElement("select");
-  listaCategoria.name = "categoria";
-  listaCategoria.id = "categoria";
-  listaCategoria.className = "form-elem lista-productos";
-  listaCategoria.required = true;
-  for (let i = 0; i < nombresCategorias.length; i++) {
-    const opc = document.createElement("option");
-    opc.value = nombresCategorias[i];
-    opc.innerHTML = nombresCategorias[i];
-    listaCategoria.appendChild(opc);
-  }
-  formulario.appendChild(listaCategoria);
-  formulario.appendChild(document.createElement("br"));
-  //boton enviar
-  const enviarBtn = document.createElement("input");
-  enviarBtn.type = "submit";
-  enviarBtn.value = "Subir producto";
-  enviarBtn.className = "btn-principal";
-  formulario.appendChild(enviarBtn);
+  createFormTienda();
 
   formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -220,6 +160,7 @@ function agregarProducto() {
               const tituloForm = document.getElementById("titulo").value;
               const precioForm = document.getElementById("precio").value;
               const categoria = document.getElementById("categoria").value;
+              const contenedorPadre = document.getElementById("contPadre");
 
               for (let i = 0; i < fileForm.files.length; i++) {
                 multipart.append(`file${i}`, fileForm.files[i]);
@@ -450,4 +391,40 @@ function buscarCliente() {
         }
       });
   });
+}
+function editarTienda() {
+  const contenedor = document.getElementById("User-cont");
+  const seccion1 = document.createElement("div");
+  seccion1.className = "Seccion";
+  contenedor.appendChild(seccion1);
+  const tiendaFilt = document.createElement("div");
+  tiendaFilt.className = "tienda-filtros";
+  tiendaFilt.id = "tienda-filtros";
+  seccion1.appendChild(tiendaFilt);
+  ///////////////////
+  const seccion2 = document.createElement("div");
+  seccion2.className = "Seccion";
+  contenedor.appendChild(seccion2);
+  const tienda = document.createElement("div");
+  tienda.className = "Tienda";
+  tienda.id = "tnd";
+  seccion2.appendChild(tienda);
+  cargarFiltros();
+  const ordenarPor = modulo.getFiltros(Number(0));
+  const url = api.getUrl();
+  const urlImg = api.getUrlImg();
+  const filtro = "Todos";
+  const params = {
+    active: true,
+    ordenarPor,
+    filtro: filtro,
+  };
+  axios
+    .post(url + "/products/", { params })
+    .then(function (response) {
+      modulo.getTienda(response, 1);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }

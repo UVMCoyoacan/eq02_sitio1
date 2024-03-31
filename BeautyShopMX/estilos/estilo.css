@@ -412,7 +412,7 @@ h3 {
 }
 .btn-dot{
     border-radius: 50%;
-    width: 20px;
+    width:  20px;
     height: 20px;
     background-color: rgb(129, 65, 65);
     border:none;
@@ -430,6 +430,13 @@ h3 {
 .dot-der{
     margin-left: 91%;
     transform:var(--state-dot);
+}
+.dot-eliminar{
+    transform:var(--state-dot);
+    grid-column: 2;
+    grid-row: 1/3;
+    margin-bottom: 93%;
+    margin-left: 93%;
 }
 .btn-dot:hover{
     opacity: 0.90;
@@ -770,8 +777,8 @@ h3 {
     }
     .btn-dot{
         border-radius: 50%;
-        width: 2vw;
-        height: 2vw;
+        width: 20px;
+        height: 20px;
         background-color: rgb(129, 65, 65);
         border:none;
         z-index: 1000;
@@ -788,6 +795,13 @@ h3 {
     .dot-der{
         margin-left: 87%;
         transform:var(--state-dot);
+    }
+    .dot-eliminar{
+        transform:var(--state-dot);
+        grid-column: 1;
+        grid-row: 1/3;
+        margin-bottom: 87%;
+        margin-left: 87%;
     }
     .lista-productos{
         justify-items: center;

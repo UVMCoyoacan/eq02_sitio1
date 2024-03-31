@@ -1,6 +1,7 @@
 const { json } = require("body-parser");
 const Product = require("../models/product");
 const image = require("../utils/image");
+const fs = require("fs");
 
 async function getProducts(req, res) {
   const { active, ordenarPor, filtro } = req.body.params;
@@ -50,9 +51,19 @@ async function addProduct(req, res) {
 }
 async function deleteProduct(req, res) {
   try {
-    const { id } = req.params;
-    await Product.findByIdAndDelete({ _id: id });
-    res.status(200).send({ msg: "Eliminacion correcta" });
+    const { id } = req.body;
+    let response = await Product.findById({ _id: id });
+    const { rutas } = response;
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(`Imagen ./uploads/${rutas[i].imagen} borrada`);
+      fs.unlink(`./uploads/${rutas[i].imagen}`, (err) => {
+        if (err) {
+          console.log("error");
+        }
+      });
+    }
+    response = await Product.findByIdAndDelete({ _id: id });
+    res.status(200).send(response);
   } catch (error) {
     console.error(error);
     res.status(400).send({ msg: "Error al eliminar al producto" });
