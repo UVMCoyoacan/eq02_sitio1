@@ -62,7 +62,7 @@ function insertarMenu() {
   const btnTitulos = [
     "Mis datos",
     "Agregar producto",
-    "Editar tienda",
+    "Eliminar producto",
     "Registrar deuda",
     "Registrar pago",
     "Buscar cliente",
