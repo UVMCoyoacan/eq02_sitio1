@@ -1,5 +1,5 @@
 function cargarTiendaApi(ordenar, filtro) {
-  const ordenarPor = obtenerFiltros(Number(ordenar));
+  const ordenarPor = modulo.getFiltros(Number(ordenar));
   const url = api.getUrl();
   const urlImg = api.getUrlImg();
   const params = {

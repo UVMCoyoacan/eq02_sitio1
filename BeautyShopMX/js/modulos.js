@@ -14,7 +14,7 @@ const modulo = (function () {
       createTienda(response, tipo);
     },
     getFiltros: function (ordenar) {
-      obtenerFiltros(ordenar);
+      return obtenerFiltros(ordenar);
     }
   };
 })();

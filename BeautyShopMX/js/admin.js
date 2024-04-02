@@ -53,14 +53,9 @@ function verificarSesion() {
 function insertarMenu() {
   //insertar el menu
   var botones = [];
-  var elementosLista = [];
   const contenedor = document.getElementById("submenu");
-  const nav = document.createElement("nav");
-  nav.className = "Submenu";
-  const lista = document.createElement("ul");
-  lista.className = "Submenu-lista";
   const btnTitulos = [
-    "Mis datos",
+    "Modificar contraseña",
     "Agregar producto",
     "Eliminar producto",
     "Registrar deuda",
@@ -70,36 +65,29 @@ function insertarMenu() {
   ];
 
   for (let i = 0; i < btnTitulos.length; i++) {
-    const elem = document.createElement("li");
-    elem.className = "Submenu-item";
     const btn = document.createElement("button");
-    btn.className = "btn-principal";
+    btn.className = "btn-principal btn-secundario";
     btn.innerHTML = btnTitulos[i];
-    elem.appendChild(btn);
     botones.push(btn);
-    elementosLista.push(elem);
+    contenedor.appendChild(btn);
   }
   for (let i = 0; i < botones.length; i++) {
-    lista.appendChild(elementosLista[i]);
     botones[i].onclick = function () {
       clickMenu(i, botones);
     };
   }
-  nav.appendChild(lista);
-  contenedor.appendChild(nav);
   ////Seleccionar [0] como el elemento seleccionado por defecto
   clickMenu(0, botones);
 }
 function vaciarDiv(contenedor) {
   contenedor.innerHTML = "";
 }
-function clickMenu(ind, botones) {
+function clickMenu(btnSelec, botones) {
   vaciarDiv(document.getElementById("User-cont"));
-  btnSelec = ind;
   for (let i = 0; i < botones.length; i++) {
-    botones[i].className = "btn-principal";
+    botones[i].className = "btn-principal btn-secundario";
   }
-  botones[btnSelec].className = "btn-principal btn-principal-selected";
+  botones[btnSelec].className = "btn-principal btn-principal-selected btn-secundario";
   if (btnSelec === 0) {
     misDatos();
   } else if (btnSelec === 1) {
