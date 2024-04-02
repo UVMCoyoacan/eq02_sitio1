@@ -28,32 +28,21 @@ function verificarSesion() {
 function insertarMenu() {
   //insertar el menu
   var botones = [];
-  var elementosLista = [];
   const contenedor = document.getElementById("submenu");
-  const nav = document.createElement("nav");
-  nav.className = "Submenu";
-  const lista = document.createElement("ul");
-  lista.className = "Submenu-lista";
   const btnTitulos = ["Mis datos", "Mis finanzas", "Cerrar Sesión"];
 
   for (let i = 0; i < btnTitulos.length; i++) {
-    const elem = document.createElement("li");
-    elem.className = "Submenu-item";
     const btn = document.createElement("button");
-    btn.className = "btn-principal";
+    btn.className = "btn-principal btn-secundario";
     btn.innerHTML = btnTitulos[i];
-    elem.appendChild(btn);
     botones.push(btn);
-    elementosLista.push(elem);
+    contenedor.appendChild(btn);
   }
   for (let i = 0; i < botones.length; i++) {
-    lista.appendChild(elementosLista[i]);
     botones[i].onclick = function () {
       clickMenu(i, botones);
     };
   }
-  nav.appendChild(lista);
-  contenedor.appendChild(nav);
   ////Seleccionar [0] como el elemento seleccionado por defecto
   clickMenu(0, botones);
 }
