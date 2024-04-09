@@ -1,3 +1,4 @@
+
 ///variables globales:
 let btnSelec = 0;
 const url = api.getUrl();
@@ -133,6 +134,7 @@ function agregarProducto() {
 
   formulario.addEventListener("submit", function (event) {
     event.preventDefault();
+
     if (verificarSesion()) {
       const token = localStorage.getItem("token");
       const headers = {
@@ -141,38 +143,44 @@ function agregarProducto() {
       axios
         .get(url + "/user/me/", { headers })
         .then(function (response) {
-          if (response.data.role === "admin") {
-            if (btnSelec === 1) {
-              const multipart = new FormData();
-              const fileForm = document.getElementById("imagenProd");
-              const tituloForm = document.getElementById("titulo").value;
-              const precioForm = document.getElementById("precio").value;
-              const categoria = document.getElementById("categoria").value;
-              const contenedorPadre = document.getElementById("contPadre");
+          if (response.data.role == "admin") {
 
-              for (let i = 0; i < fileForm.files.length; i++) {
-                multipart.append(`file${i}`, fileForm.files[i]);
-              }
+            const multipart = new FormData();
+            const fileForm = document.getElementById("imagenProd");
+            const tituloForm = document.getElementById("titulo").value;
+            const precioForm = document.getElementById("precio").value;
+            const categoria = document.getElementById("categoria").value;
+            const contenedorPadre = document.getElementById("contPadre");
 
-              multipart.append("titulo", tituloForm);
-              multipart.append("precio", precioForm);
-              multipart.append("categoria", categoria);
-              axios
-                .post(url + "/products/add", multipart, { headers })
-                .then(function (response) {
-                  //console.log(response.data);
-                  const msgCont = document.createElement("div");
-                  msgCont.className = "addProductResp";
-                  contenedorPadre.appendChild(msgCont);
-                  const msg = document.createElement("h5");
-                  msg.innerHTML = `${tituloForm} se ha agregado exitosamente a la tienda`;
-                  msgCont.appendChild(msg);
-                  formulario.reset();
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+            for (let i = 0; i < fileForm.files.length; i++) {
+              multipart.append(`file${i}`, fileForm.files[i]);
             }
+
+            multipart.append("titulo", tituloForm);
+            multipart.append("precio", precioForm);
+            multipart.append("categoria", categoria);
+            console.log(url + "/products/add");
+            axios
+              .post(url + "/products/add", multipart, { headers })
+              .then(function (response) {
+                //console.log(response.data);
+
+                const msgCont = document.createElement("div");
+                msgCont.className = "addProductResp";
+                contenedorPadre.appendChild(msgCont);
+                const msg = document.createElement("h5");
+                msg.innerHTML = `${tituloForm} se ha agregado exitosamente a la tienda`;
+                msgCont.appendChild(msg);
+                formulario.reset();
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+
+          }
+          else {
+            console.log(response.data.role);
           }
         })
         .catch(function (error) {
