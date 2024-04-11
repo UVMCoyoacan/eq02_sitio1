@@ -1,10 +1,10 @@
 // modulo.js
 const api = (function () {
   // Variables privadas
-  const url = "http://servergutierrez.ddns.net:3977/api/v1";
-  const urlIMG = "http://servergutierrez.ddns.net/eq02_sitio1/server/uploads/";
-  //const url = "http://localhost:3977/api/v1/";
-  //const urlIMG = "http://localhost/"
+  //const url = "http://servergutierrez.ddns.net:3977/api/v1";
+  //const urlIMG = "http://servergutierrez.ddns.net/eq02_sitio1/server/uploads/";
+  const url = "http://localhost:3977/api/v1/";
+  const urlIMG = "http://localhost:3977/"
   const categorias = [
     "Todos",
     "Ropa",

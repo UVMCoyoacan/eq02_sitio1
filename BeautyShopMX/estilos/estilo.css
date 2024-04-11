@@ -540,6 +540,7 @@ h3 {
     color: var(--colorTextoMenuPie);
     color:var(--colorFondoMenu);
     border-style: none;
+    padding: 10px 5px;
     
 }
 

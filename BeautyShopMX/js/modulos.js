@@ -542,7 +542,7 @@ async function eliminarProducto(id) {
   axios
     .post(url + "/product/delete/", multi, { headers })
     .then(function (response) {
-      window.location.href = "../sec_tienda/tienda.html";
+      
     })
     .catch(function (error) {
       console.log(error);

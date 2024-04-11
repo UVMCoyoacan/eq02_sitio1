@@ -143,7 +143,7 @@ function agregarProducto() {
       axios
         .get(url + "/user/me/", { headers })
         .then(function (response) {
-          if (response.data.role == "admin") {
+          if (response.data.role === "admin") {
 
             const multipart = new FormData();
             const fileForm = document.getElementById("imagenProd");
@@ -172,15 +172,10 @@ function agregarProducto() {
                 msg.innerHTML = `${tituloForm} se ha agregado exitosamente a la tienda`;
                 msgCont.appendChild(msg);
                 formulario.reset();
-                console.log(response);
               })
               .catch(function (error) {
                 console.log(error);
               });
-
-          }
-          else {
-            console.log(response.data.role);
           }
         })
         .catch(function (error) {
