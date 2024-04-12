@@ -10,3 +10,5 @@ Una vez activada la API, dirigirse a la carpeta "Beauty Shop MX" y ejecutar inde
 En el inicio de sesión se tienen dos roles principales: administrador y cliente. Para efectos de la prueba del sitio:
   1. Administrador: admin@correo.com (Password: 123456)
   2. Cliete: usuario@correo.com (Password: 123456)
+
+Se podrá apreciar el sitio web en modo Desktop y móvil debido a que tiene un diseño responsivo
